@@ -7,8 +7,8 @@
 
 ## Current Status
 
-**Phase:** Episode 1 production — in progress
-**Immediate priority:** Generate Flow clips for "The Lost Map" (Scout vs. Grimble, Ep. 1)
+**Phase:** The Midnight Market — new series, characters confirmed, Episode 1 shot block next
+**Immediate priority:** Write Episode 1 Flow shot block — "The First Door"
 
 ---
 
@@ -18,67 +18,79 @@
 |---|-------|------|---------------|--------|
 | 1 | Down on the Farm 🐓 | Farm animal song | Yes | ✅ Uploaded |
 | 2 | Five Little Dinosaurs 🦕 | Dino dance song | Yes | ✅ Uploaded |
-| 3 | The Lost Map — Scout vs. GRIMBLE | Adventure episode | No | 🎬 In production |
+| 3 | The Lost Map — Scout | Adventure episode | No | ⏸ Shelved — replaced by Midnight Market |
 
 ---
 
-## Episode 1 — "The Lost Map" Production Tracker
+## Active Series: The Midnight Market
 
-**Story:** Grimble steals Scout's Golden Explorer Map → Scout tracks him → instead of fighting, Scout draws Grimble onto the map → Grimble sees himself for the first time → rain cloud disappears, personal sunbeam appears → they walk home together.
+**Concept:** Mystery + hidden magic adventure for ages 6–12. A young fox named Kiran is the only one who can see hidden doors that appear at midnight, leading to a vast secret bazaar where folklore creatures come to trade.
 
-**Runtime:** ~4:52 across 28 shots
-**Music:** "The Lost Map" — cinematic adventure electronic, 2:40, no vocals
+**Series bible:** `episodes/the-midnight-market/` (see artifact link in chat history)
 
-### Shot Generation
+### Characters — CONFIRMED ✅
 
-| Block | Shots | Status | Notes |
-|-------|-------|--------|-------|
-| Block 1 | 1–14 | ⬜ Not started | Paste `scout_adventure_v4_twoblock.md` Block 1 into Flow |
-| Block 2 | 15–28 | ⬜ Not started | Paste Block 2 after Block 1 clips are done |
+All three characters generated and approved in Google Flow. Reference images saved to repo.
 
-### Post-Production Steps
+| Character | File | Status |
+|-----------|------|--------|
+| Kiran (protagonist) | `characters/kiran_reference.jpg` | ✅ Confirmed |
+| Chimki (guide) | `characters/chimki_reference.jpg` | ✅ Confirmed |
+| The Collector (antagonist) | `characters/collector_reference.jpg` | ✅ Confirmed |
 
-- [ ] Generate music track in Flow Music using prompt in `scout_adventure_v4.md`
-- [ ] Concatenate all 28 clips with ffmpeg
-- [ ] Merge music track
-- [ ] Compress final video under 30MB
-- [ ] Upload to YouTube
-- [ ] Set title, description, thumbnail, AI disclosure, visibility
+Flow Characters tab descriptions: `characters/character_descriptions.md`
+
+### Episode 1 — "The First Door"
+
+| Step | Status | Notes |
+|------|--------|-------|
+| Episode concept | ✅ Done | See series bible |
+| Character references | ✅ Done | All three saved in repo |
+| Shot block (28 shots) | ⬜ Not started | Next task |
+| Flow clip generation | ⬜ Not started | After shot block written |
+| Music prompt | ⬜ Not started | Trap-pop style, BPM 97–100 |
+| Post-production | ⬜ Not started | ffmpeg concat + compress |
+| YouTube upload | ⬜ Not started | — |
 
 ---
 
 ## Flow Session Checklist (run at the start of every Flow session)
 
 - [ ] Open Characters tab
-- [ ] Upload Scout reference image
-- [ ] Paste Scout character description
-- [ ] Save character
-- [ ] Then paste shot block
+- [ ] Upload `kiran_reference.jpg` → paste Kiran description → Save
+- [ ] Upload `chimki_reference.jpg` → paste Chimki description → Save
+- [ ] Upload `collector_reference.jpg` → paste Collector description → Save
+- [ ] Then paste shot block (Style Bible at top)
 
 ---
 
-## Next Episodes (ideas queue)
+## Series Episode Queue
 
-| Priority | Idea | Notes |
-|----------|------|-------|
-| Next | Scout finds a hidden underwater cave | Introduces water world |
-| After | Grimble tries to help Scout cross a desert | Grimble's first useful moment |
-| Later | Scout discovers Rainbow Hill's secret | What makes the hill striped |
+| # | Episode | Status |
+|---|---------|--------|
+| 1 | "The First Door" — Kiran discovers the Market, meets Chimki | ⬜ Shot block needed |
+| 2 | "The Shop of Lost Things" — first sighting of the Collector | ⬜ Planned |
+| 3 | "The Storm Singer" — Keeper speaks for the first time | ⬜ Planned |
+| 4 | "The Collector's Name" — antagonist moves to foreground | ⬜ Planned |
+| 5 | "The Book That Refused to Stay" — vetala folk tale | ⬜ Planned |
 
 ---
 
 ## Open Tasks
 
-- [ ] Generate Episode 1 Flow clips (Block 1 → Block 2)
-- [ ] Generate Episode 1 music
+- [ ] Write Episode 1 shot block (28 shots, two-block split for Flow)
+- [ ] Generate Episode 1 Flow clips
+- [ ] Write Episode 1 music prompt (trap-pop, BPM 97–100)
 - [ ] Complete Episode 1 post-production and upload
-- [ ] Plan Episode 2 prompt blocks
+- [ ] Continue kids songs in parallel (2–3/week for watch hours growth)
 
 ---
 
 ## Notes / Blockers
 
-_(Add anything that's stuck, half-done, or needs a decision here)_
+- Scout / "The Lost Map" shelved — replaced by The Midnight Market (stronger market positioning for 6–12 audience)
+- Flow character references confirmed — use these every session, do not regenerate from scratch
+- Chimki came out as a translucent crystal mouse with starlight inside — better than original concept, keep this design
 
 ---
 
@@ -90,5 +102,7 @@ _(Add anything that's stuck, half-done, or needs a decision here)_
 | 2026-08-13 | Added FLOW_COMPLIANCE.md — Google Flow & Flow Music T&C prompt rules |
 | 2026-08-13 | Updated CLAUDE.md — PR workflow rule, compliance section, YouTube AI disclosure steps |
 | 2026-08-13 | Created ep01 shot blocks (28 shots, two-block split) and music prompt |
-| 2026-08-13 | Music prompt updated to fast electro + vocal hook (BPM 132) |
-| 2026-08-13 | Scout character description reordered — braids/boots first to avoid Sonic association in Flow |
+| 2026-08-13 | Scout / The Lost Map shelved — strategic pivot to The Midnight Market |
+| 2026-08-13 | Series bible created for The Midnight Market (mystery + hidden magic, ages 6–12) |
+| 2026-08-13 | All three character reference images generated in Google Flow and confirmed |
+| 2026-08-13 | Character descriptions saved to episodes/the-midnight-market/characters/ |
