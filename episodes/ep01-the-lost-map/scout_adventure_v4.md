@@ -21,18 +21,20 @@
 ```
 CHARACTER NAME: Scout
 
-Blue hedgehog, adventurer and explorer. Long braided dreadlocks — NOT swept-back
-quills — genuine braided locs decorated with teal-blue beads and burnt-orange beads
-along their length. Orange-brown leather hiking and adventure boots on both feet.
-Bare blue paws with no gloves. Cream-colored fur patch on his chest. Brown
-expressive eyes. Athletic build with natural proportions — not baby-round, not
-hulking. Confident adventurer posture: curious, ready, warm.
+Explorer and adventurer. Long braided dreadlocks — thick genuine loc braids
+decorated with teal-blue beads and burnt-orange beads woven along their length.
+Orange-brown leather hiking boots on both feet — rugged, worn-in explorer boots.
+Bare paws, no gloves. Cream-colored fur patch on his chest.
 
-3D CGI animated style. DreamWorks/Pixar theatrical quality. Physical weight, fur
-texture, personality-driven expressions. NOT photorealistic. NOT flat 2D illustration.
+Anthropomorphic hedgehog character. Blue fur. Brown expressive eyes.
+Athletic build — natural proportions, not baby-round, not hulking.
+Warm, curious, confident posture.
 
-The braids and boots say he has been places. The bare paws say he is not afraid
-to touch the world.
+3D CGI animated style. DreamWorks/Pixar theatrical quality. Physical weight,
+fur texture, personality-driven expressions. NOT photorealistic. NOT flat 2D.
+
+IMPORTANT: Character has braided dreadlocks hanging down — NOT swept-back
+pointed quills. Boots are always visible on both feet.
 ```
 
 ### GRIMBLE
@@ -325,72 +327,73 @@ Slow fade to warm golden light.
 
 ---
 
-## MUSIC PROMPT (Flow Music / Lyria)
+## MUSIC PROMPT — v2 (Flow Music / Lyria)
 
 Paste into Flow Music separately after generating the video clips.
 
 ```
-Purely instrumental. No lyrics. No voiceover. No vocals of any kind.
-General audience animated adventure film — not a children's nursery rhyme show.
+Fast electronic adventure track. High energy from the very first second.
+No full lyrics. No voiceover. No sentences.
 
-Title mood: "The Lost Map" — a young explorer's brave and heartfelt journey
-Genre: Cinematic adventure — orchestral and electronic hybrid
+Genre: Fast electro / electronic dance — adventure energy
+BPM: 130-135
 Duration: 4 minutes 45 seconds
-Overall feel: Wonder → urgency → storm → stillness → warmth → triumph → peace
+Overall feel: Urgent, propulsive, heroic. Like sprinting toward something exciting.
+
+VOCAL HOOK:
+Include a short repeated vocal sound locked to the beat. A single syllable
+or phonetic chant repeated rhythmically. Does NOT need to be a real word.
+Examples of the feel: "hey hey hey", "oh oh oh", "ah-ah-ah", or any non-word
+rhythmic vocal sound. The hook should feel like a crowd chant punching in on
+the beat. No meaning needed. Just energy.
 
 TIME-CODED STRUCTURE:
 
-0:00–0:30
-Warm, curious opening. Gentle solo piano with light pizzicato strings.
-A sense of golden morning and possibility. BPM: ~95.
-The explorer's theme introduced — simple, melodic, memorable.
+0:00-0:15
+Cold open. Beat drops immediately. Hard kick drum, sharp synth stab, driving
+bass. Full energy from second one. BPM 132.
 
-0:30–0:50
-Tension builds. Low brass enters under the piano. Dark synth undertone.
-Something is coming. BPM holds at 95 but harmonic tension rises.
+0:15-0:45
+Main verse energy. Lead synth melody over the driving beat. Vocal hook enters:
+short repeated sound on the beat, rhythmic and punchy.
 
-0:50–1:30
-The chase! Driving percussion enters — propulsive, urgent. Brass stabs.
-Electronic pulse layered under the orchestra. BPM: ~120.
-Energy is high — exciting, not scary. Adventure, not danger.
+0:45-1:15
+Build. Layers stack. Additional synth lines, bass gets heavier. Vocal hook
+intensifies, comes in more frequently.
 
-1:30–2:10
-The storm. Percussion intensifies, sweeping strings, dramatic brass hits.
-Purple storm energy in the music — powerful, swirling, relentless.
-Peak intensity of the whole track. BPM: ~125.
+1:15-1:50
+Drop 1. Maximum energy. Full synth, hard bass, percussion locked in tight.
+Vocal hook punching through on every 4th beat.
 
-2:10–2:30
-The music drops suddenly to near-silence. Sparse solo piano only.
-Gentle and questioning. Two characters face each other. BPM: ~80.
-The storm has paused. Something unexpected is happening.
+1:50-2:10
+Break. Beat pulls back but never fully stops. Half-time feel. Synth melody
+breathes. Vocal hook drops out. Brief tension before the next wave.
 
-2:30–3:10
-A simple, heartfelt melody emerges — solo violin or solo piano, warm and unhurried.
-The act of drawing. The act of being seen. No percussion. Just warmth.
-BPM: ~75.
+2:10-2:45
+Rising build. Tension climbs. Synth rises in pitch, percussion tightens,
+bass thickens. Vocal hook returns and builds to a peak.
 
-3:10–3:40
-The melody blooms. Full strings enter softly, adding depth under the solo line.
-A growing feeling of wonder and recognition. The map glows.
-BPM rising gently to ~85.
+2:45-3:30
+Drop 2. Bigger than Drop 1. Full power. Main synth theme blazing.
+Vocal hook at full intensity. Peak of the whole track.
 
-3:40–4:15
-Full orchestral warmth — redemptive swell. Major key resolution.
-The rain stops. The sunbeam appears. Everything opens up.
-BPM: ~95. Triumphant but tender — not bombastic.
+3:30-4:15
+Extended run. Full energy held. Slight variation in the synth melody.
+Vocal hook continues, punchy and rhythmic.
 
-4:15–4:40
-Bright, joyful forward motion. The explorer's theme returns — now fuller, warmer,
-shared. Boot prints on the path home. BPM: ~100.
-This is what adventure feels like when you bring someone back with you.
+4:15-4:35
+Wind-down. Energy begins to resolve but stays upbeat and forward-moving.
+Vocal hook tapers to every 8 beats.
 
-4:40–4:45
-Solo piano alone — one final statement of the explorer's theme. Gentle fade to silence.
+4:35-4:45
+Outro. Synth fades cleanly over the beat, then beat drops out last.
 
-Instruments: Piano (lead melody), strings (violin, cello), French horn, soft brass,
-light electronic pulse/synth layer, orchestral percussion (no heavy drums — timpani
-only at storm peak), pizzicato strings for texture.
-Avoid: Electric guitar, heavy bass drops, DJ-style transitions, 8-bit sounds.
+Instruments: Electronic drums (hard kick, snappy snare, hi-hats), synth bass,
+lead synth (bright and cutting), layered synth pads, vocal chant hook
+(single syllable or phonetic sound repeated rhythmically on the beat).
+
+Avoid: Slow acoustic intro, long silences, orchestral strings as lead,
+nursery-rhyme feel, 8-bit sounds.
 ```
 
 ---

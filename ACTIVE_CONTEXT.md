@@ -89,3 +89,6 @@ _(Add anything that's stuck, half-done, or needs a decision here)_
 | 2026-08-13 | Created CLAUDE.md and ACTIVE_CONTEXT.md from handoff document |
 | 2026-08-13 | Added FLOW_COMPLIANCE.md — Google Flow & Flow Music T&C prompt rules |
 | 2026-08-13 | Updated CLAUDE.md — PR workflow rule, compliance section, YouTube AI disclosure steps |
+| 2026-08-13 | Created ep01 shot blocks (28 shots, two-block split) and music prompt |
+| 2026-08-13 | Music prompt updated to fast electro + vocal hook (BPM 132) |
+| 2026-08-13 | Scout character description reordered — braids/boots first to avoid Sonic association in Flow |
