@@ -87,3 +87,5 @@ _(Add anything that's stuck, half-done, or needs a decision here)_
 | Date | Change |
 |------|--------|
 | 2026-08-13 | Created CLAUDE.md and ACTIVE_CONTEXT.md from handoff document |
+| 2026-08-13 | Added FLOW_COMPLIANCE.md — Google Flow & Flow Music T&C prompt rules |
+| 2026-08-13 | Updated CLAUDE.md — PR workflow rule, compliance section, YouTube AI disclosure steps |

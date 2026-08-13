@@ -102,7 +102,8 @@ Before every publish:
 - [ ] Description — character intro + subscribe CTA + hashtags
 - [ ] Thumbnail — brightest, clearest frame
 - [ ] Made for Kids — Yes (kids songs) / No (Scout episodes)
-- [ ] **AI use disclosure** — always (YouTube requires it)
+- [ ] **AI disclosure toggle** — YouTube Studio → "Altered or synthetic content" → Yes (required by YouTube policy)
+- [ ] **AI disclosure in description** — add line: `✨ Created using Google Flow (AI video) and Flow Music/Lyria (AI music). All characters are original and fictional.`
 - [ ] Visibility — Public
 - [ ] Shorts remixing — Allow
 
@@ -121,11 +122,35 @@ Before every publish:
 
 ---
 
+## Repository Workflow (Claude Instructions)
+
+1. **Always work on a feature branch** — never commit directly to main.
+2. **Open a PR for every change** — even single-file updates.
+3. **Merge after green CI** — if CI checks exist, wait for them to pass before merging. If there are no CI checks, merge immediately after the PR is opened.
+4. **Update ACTIVE_CONTEXT.md** on every PR — reflect the current production status before pushing.
+5. **Compliance check before writing prompts** — every new video or music prompt must follow `FLOW_COMPLIANCE.md`. Never reference existing IP, real people, or copyrighted works by name.
+
+---
+
+## Prompt Compliance
+
+Before writing any Flow video or Flow Music prompt, check `FLOW_COMPLIANCE.md`.
+
+Quick rules:
+- Describe Scout and Grimble by visual attributes only — never name any existing character or IP
+- No real people, no copyrighted logos, no branded assets in any prompt
+- Music: describe mood and instruments — never reference a specific song or artist by name
+- Always include "No voiceover. No lyrics. Purely instrumental." in every music prompt
+- Always disclose AI use on YouTube (required by platform policy)
+
+---
+
 ## Repository Structure
 
 ```
 CLAUDE.md                          ← this file (project reference for Claude)
 ACTIVE_CONTEXT.md                  ← current production status (update constantly)
+FLOW_COMPLIANCE.md                 ← Google Flow & Flow Music T&C rules for prompts
 episodes/
   ep01-the-lost-map/
     scout_adventure_v4.md          ← full 28-shot Flow prompt block + metadata
