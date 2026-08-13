@@ -8,7 +8,7 @@
 ## Current Status
 
 **Phase:** The Midnight Market — new series, characters confirmed, Episode 1 shot block next
-**Immediate priority:** Write Episode 1 Flow shot block — "The First Door"
+**Immediate priority:** Generate Episode 1 Flow clips — paste Block 1 then Block 2 into Google Flow
 
 ---
 
@@ -46,9 +46,9 @@ Flow Characters tab descriptions: `characters/character_descriptions.md`
 |------|--------|-------|
 | Episode concept | ✅ Done | See series bible |
 | Character references | ✅ Done | All three saved in repo |
-| Shot block (28 shots) | ⬜ Not started | Next task |
-| Flow clip generation | ⬜ Not started | After shot block written |
-| Music prompt | ⬜ Not started | Trap-pop style, BPM 97–100 |
+| Shot block (28 shots) | ✅ Done | `ep01-the-first-door-shotblock.md` — two-block split, paste-ready |
+| Flow clip generation | ⬜ Not started | Paste Block 1 then Block 2 into Flow |
+| Music prompt | ✅ Done | In shot block file — cinematic adventure electronic, BPM 97 |
 | Post-production | ⬜ Not started | ffmpeg concat + compress |
 | YouTube upload | ⬜ Not started | — |
 
@@ -78,9 +78,9 @@ Flow Characters tab descriptions: `characters/character_descriptions.md`
 
 ## Open Tasks
 
-- [ ] Write Episode 1 shot block (28 shots, two-block split for Flow)
-- [ ] Generate Episode 1 Flow clips
-- [ ] Write Episode 1 music prompt (trap-pop, BPM 97–100)
+- [x] Write Episode 1 shot block (28 shots, two-block split for Flow) — `ep01-the-first-door-shotblock.md`
+- [x] Write Episode 1 music prompt — in shot block file, cinematic adventure electronic, BPM 97
+- [ ] Generate Episode 1 Flow clips — paste Block 1 then Block 2 into Flow
 - [ ] Complete Episode 1 post-production and upload
 - [ ] Continue kids songs in parallel (2–3/week for watch hours growth)
 
@@ -101,7 +101,7 @@ Flow Characters tab descriptions: `characters/character_descriptions.md`
 | 2026-08-13 | Created CLAUDE.md and ACTIVE_CONTEXT.md from handoff document |
 | 2026-08-13 | Added FLOW_COMPLIANCE.md — Google Flow & Flow Music T&C prompt rules |
 | 2026-08-13 | Updated CLAUDE.md — PR workflow rule, compliance section, YouTube AI disclosure steps |
-| 2026-08-13 | Created ep01 shot blocks (28 shots, two-block split) and music prompt |
+| 2026-08-13 | Created ep01 shot blocks (28 shots, two-block split) and music prompt for The First Door |
 | 2026-08-13 | Scout / The Lost Map shelved — strategic pivot to The Midnight Market |
 | 2026-08-13 | Series bible created for The Midnight Market (mystery + hidden magic, ages 6–12) |
 | 2026-08-13 | All three character reference images generated in Google Flow and confirmed |
