@@ -29,9 +29,11 @@ ffmpeg (mobile)                → Concatenate clips, merge music, compress unde
 
 ### Scout (hero)
 
-Blue hedgehog, adventurer and explorer. Long braided dreadlocks (NOT swept-back quills) decorated with teal-blue and burnt-orange beads. Orange-brown leather hiking boots. Bare blue paws, no gloves. Cream chest patch. Brown expressive eyes. Athletic, natural proportions. Confident, curious, warm posture.
+**Flow Characters tab — paste this description (order matters: lead with braids and boots, not species):**
 
-**Style:** 3D CGI animated, DreamWorks/Pixar theatrical quality. Physical weight, fur texture, personality-driven expressions. NOT photorealistic. NOT flat 2D.
+> Explorer and adventurer. Long braided dreadlocks — thick genuine loc braids decorated with teal-blue beads and burnt-orange beads woven along their length. Orange-brown leather hiking boots on both feet — rugged, worn-in explorer boots. Bare paws, no gloves. Cream-colored fur patch on his chest. Anthropomorphic hedgehog character. Blue fur. Brown expressive eyes. Athletic build — natural proportions, not baby-round, not hulking. Warm, curious, confident posture. 3D CGI animated style. DreamWorks/Pixar theatrical quality. Physical weight, fur texture, personality-driven expressions. NOT photorealistic. NOT flat 2D. IMPORTANT: Character has braided dreadlocks hanging down — NOT swept-back pointed quills. Boots are always visible on both feet.
+
+**Why this order:** Starting with "braided dreadlocks" and "hiking boots" anchors Flow on Scout's unique features before it reads "blue hedgehog" — which otherwise triggers Sonic associations from training data.
 
 **Copyright safety:** braided locs + hiking boots + explorer identity = legally distinct from any existing IP. No white gloves, no swept-back quills, no speedster identity.
 
