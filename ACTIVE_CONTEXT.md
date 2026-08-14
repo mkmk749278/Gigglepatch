@@ -7,8 +7,46 @@
 
 ## Current Status
 
-**Phase:** The Midnight Market — new series, characters confirmed, Episode 1 shot block next
-**Immediate priority:** Generate Episode 1 Flow clips — paste Block 1 then Block 2 into Google Flow
+**Phase:** Evaluating production methods — character design NOT finalized, testing what
+gives reliable character consistency for adventure episodes
+**Immediate priority:** Decide the production route (see "Production Route Decision" below)
+
+### Key finding from method testing
+
+Character consistency is an **architectural** problem, not a prompting problem:
+AI image/video models generate pixels and hold no persistent character, so the design
+drifts between generations. Games and Pixar are consistent because the character is a
+**persistent asset** that is posed and re-rendered.
+
+Methods tested (all code in `pipeline/`, notes in `pipeline/README.md`):
+
+| Method | Consistency | Visual quality | Verdict |
+|--------|-------------|----------------|---------|
+| Flow clips + Ken Burns | poor between clips | high | motion too static |
+| Programmatic 2D (PIL) | perfect | very low | rejected — looks dated |
+| Flux plates + interpolation + coded VFX | good | high | usable; motion is the limit |
+| 2.5D cutout rig (IK, overlap, motion blur) | **perfect** | medium | only 2 fixed angles possible |
+| Image→3D (TripoSR, CPU) | n/a | unusable | single-image 3D gives a blob |
+| **CC0 rigged 3D + Blender** | **perfect** | medium (low-poly) | **true 360, real mocap** |
+
+Negative results worth remembering:
+- Flux **cannot** produce a consistent multi-angle turnaround — it ignores angle
+  instructions and drifts the design. There is no image-gen path to 360.
+- Single-image 3D (TripoSR) on a stylized character produces unusable geometry.
+
+---
+
+## Production Route Decision (open)
+
+| Route | Needs | Gets |
+|-------|-------|------|
+| Keep Google Flow | nothing | best motion quality; consistency via Characters tab |
+| Video API (Replicate/FAL) | API key | Claude generates directly, no setup |
+| **GPU PC + Claude Code locally** | 24GB VRAM GPU | LoRA training + local video models, no per-run cost |
+| CC0 rigged 3D | nothing | guaranteed consistency, low-poly look |
+
+**Note:** this cloud sandbox has no GPU and blocks SSH, so it cannot drive a rented
+GPU box. Running Claude Code *on* the GPU machine is the way to use one.
 
 ---
 
