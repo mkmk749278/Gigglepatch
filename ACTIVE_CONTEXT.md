@@ -8,7 +8,8 @@
 ## Current Status
 
 **Phase:** *Tara and the Star Lantern* — the channel's primary series
-**Immediate priority:** Generate Ep. 1 Flow clips. **Tara alone first**, until she is right
+**Immediate priority:** Generate the 10-second test shot — `series-tara/TEST_SHOT.md`
+One clip decides whether the 32-shot block is worth generating
 
 ### Content lines
 
@@ -58,7 +59,8 @@ Scout is paused, not cancelled. "The Lost Map" is fully written and unstarted in
 |------|--------|
 | Character bible | ✅ `series-tara/CHARACTER_BIBLE.md` |
 | Reference image prompts | ✅ `series-tara/CHARACTER_REFERENCE_PROMPTS.md` |
-| Reference images generated | ⬜ **NEXT — start with Tara, 8+ attempts** |
+| Reference images generated | ⬜ Start with Tara, 8+ attempts |
+| **10-second test shot** | ⬜ **DO THIS FIRST — `series-tara/TEST_SHOT.md`** |
 | IP safety documented in FLOW_COMPLIANCE §6 | ✅ Done |
 | Series format doc | ✅ `series-tara/SERIES_FORMAT.md` |
 | Episode 1 shot block | ✅ `series-tara/ep01-three-things/tara_ep01.md` (32 shots) |
@@ -84,8 +86,9 @@ jaggery (clap three times). Ends by leaving a sweet on the wall for Kaaki.
 
 ## Open Tasks
 
-- [ ] Tara: run `tools/continuity_check.py` over every Flow shot before assembly
+- [ ] Tara: **generate the 10-second test shot and check it** — walk, stop, turn to camera, lift lantern
 - [ ] Tara: generate reference images in ImageFX/Whisk — Tara first, lock her before anything else
+- [ ] Tara: run `tools/continuity_check.py` over every Flow shot before assembly
 - [ ] Tara: save keepers into `series-tara/reference/` with the fixed filenames
 - [ ] Tara: upload references to the Flow Characters tab
 - [ ] Tara: generate Ep. 1 Flow clips
@@ -127,6 +130,7 @@ _(Add anything that's stuck, half-done, or needs a decision here)_
 | 2026-08-15 | Character reference image prompts written for all six plus the lantern prop, with accept/reject checklists |
 | 2026-08-15 | Added `tools/continuity_check.py` — automated frame-to-frame QC for Flow shots (jump/flicker/drift/freeze), validated against injected defects |
 | 2026-08-15 | `tools/ANIMATION_APPROACH.md` — why frame-by-frame generation is not the method, and which parts of that workflow we do keep |
+| 2026-08-15 | `series-tara/TEST_SHOT.md` — one 10-second clip to validate Tara before committing to 32 shots |
 
 ---
 
