@@ -65,7 +65,8 @@ Scout is paused, not cancelled. "The Lost Map" is fully written and unstarted in
 | Puppet: CALL-OUT PAUSE (10s) | ✅ Renders offline, ~70s at 1080p |
 | Puppet: walk cycle + scrolling bg (10s) | ✅ Renders clean |
 | Puppet part-set prompts | ✅ `series-tara/PART_SET_PROMPTS.md` |
-| Puppet part art generated | ⬜ **NEXT if taking the puppet route** |
+| Puppet part art generated | ⬜ **NEXT — `series-tara/NANO_BANANA_PROMPTS.md`** |
+| Auto-rig from one A-pose image | ✅ `tools/autorig.py`, tested |
 | Location art (4 stages) | ✅ `tools/scenes.py` — courtyard, neem lane, mango grove, banyan court |
 | Camera (pan / push-in) | ✅ `puppet.Camera` — crops a window from a 2560x1440 stage |
 | Chikoo rig | ✅ 3 parts, tail curls into the question mark |
@@ -108,7 +109,8 @@ jaggery (clap three times). Ends by leaving a sweet on the wall for Kaaki.
 
 ### Puppet route (parallel option — no credits, no drift)
 
-- [ ] Generate the part set from `series-tara/PART_SET_PROMPTS.md` into `series-tara/reference/parts/`
+- [ ] Generate Tara's hero image in Nano Banana, then the A-pose from it
+- [ ] Run `tools/autorig.py` on the A-pose, check `annotate()` output before trusting the cut
 - [ ] Wire the PNGs into `tools/tara_rig.py`, replacing the `_draw_*` functions
 - [ ] Check pivots with an all-zero-rotation frame before animating
 - [ ] Decide the split: puppet for character performance, Flow for establishing shots
@@ -147,6 +149,7 @@ _(Add anything that's stuck, half-done, or needs a decision here)_
 | 2026-08-15 | Added `tools/continuity_check.py` — automated frame-to-frame QC for Flow shots (jump/flicker/drift/freeze), validated against injected defects |
 | 2026-08-15 | `tools/ANIMATION_APPROACH.md` — why frame-by-frame generation is not the method, and which parts of that workflow we do keep |
 | 2026-08-15 | `series-tara/TEST_SHOT.md` — one 10-second clip to validate Tara before committing to 32 shots |
+| 2026-08-15 | `tools/autorig.py` — cuts one A-pose image into rig parts; Nano Banana prompt sequence written |
 | 2026-08-15 | Built a cut-out puppet engine — the technique Dora actually used. 12-part Tara rig, CALL-OUT PAUSE animated, 240 frames at 1080p rendered offline with no credits |
 | 2026-08-15 | continuity_check JUMP now compares each frame to its local neighbourhood, so a real gesture in a still shot no longer reads as a discontinuity |
 | 2026-08-15 | Puppet walk cycle added with a scrolling background — the cut-out technique for journeys; lantern resized after it dragged on the ground |

@@ -23,6 +23,17 @@
 |------|-------------|---------------|----------------------|
 | Google Flow (video) | Google AI Pro | ✅ Allowed | ✅ Allowed |
 | Flow Music / Lyria | Google AI Pro | ✅ Allowed | ✅ Allowed |
+| ImageFX / Whisk (stills) | Google AI Pro | ✅ Allowed | ✅ Allowed |
+| Nano Banana — Gemini 2.5 Flash Image | Gemini / Google AI | ✅ Allowed | ✅ Allowed |
+
+**Nano Banana** is a Google generative image model, so everything in this
+document applies to it unchanged — including §2's ban on realistic depictions of
+children. Its outputs carry the same SynthID watermark. Confirm your own
+subscription tier covers commercial use before publishing from it.
+
+It is the preferred tool for character art because it holds a character across
+generations and accepts editing instructions on an image it already produced,
+which is what a cut-out rig needs. See `series-tara/NANO_BANANA_PROMPTS.md`.
 
 **Key distinction:** Google grants a license to use and monetize outputs. Google retains ownership of the underlying AI models. We do not own the raw AI output as copyright — we own the creative direction, editing, and the final assembled video as a human-authored work.
 
