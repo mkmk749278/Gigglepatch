@@ -165,40 +165,62 @@ def build_rig(lit_points=0):
 
 
 def _draw_squirrel_body():
-    w, h = 150, 170
+    """Sitting upright, seen from the side — the pose a palm squirrel holds
+    most of the time. Stripes run down the length of the back."""
+    w, h = 130, 165
     im = _img(w, h)
     d = ImageDraw.Draw(im)
-    d.ellipse((26, 40, 118, 156), fill=(146, 124, 100, 255))          # body
-    for i, y in enumerate((60, 84, 108)):                             # three stripes
-        d.ellipse((44 + i * 2, y, 100 - i * 2, y + 13), fill=(238, 226, 200, 255))
-    d.ellipse((44, 132, 74, 160), fill=(126, 104, 84, 255))           # hind foot
-    return im, (72, 60)
+    d.ellipse((30, 34, 112, 150), fill=(150, 128, 104, 255))          # haunch/body
+    d.ellipse((44, 22, 104, 96), fill=(158, 136, 112, 255))           # chest
+    for i, x in enumerate((60, 76, 92)):                              # three stripes
+        d.ellipse((x, 44 + i * 3, x + 9, 128 - i * 4),
+                  fill=(238, 226, 200, 255))
+    d.ellipse((36, 118, 78, 152), fill=(132, 110, 88, 255))           # hind foot
+    d.ellipse((44, 74, 66, 100), fill=(158, 136, 112, 255))           # front paw
+    return im, (72, 40)
 
 
 def _draw_squirrel_head():
-    w, h = 120, 120
+    w, h = 104, 104
     im = _img(w, h)
     d = ImageDraw.Draw(im)
-    d.ellipse((22, 24, 98, 100), fill=(152, 130, 106, 255))
-    d.ellipse((28, 12, 54, 40), fill=(132, 110, 88, 255))             # ears
-    d.ellipse((66, 12, 92, 40), fill=(132, 110, 88, 255))
-    d.ellipse((40, 50, 56, 68), fill=INK)                             # eyes
-    d.ellipse((64, 50, 80, 68), fill=INK)
-    d.ellipse((44, 54, 50, 60), fill=(255, 255, 255, 255))
-    d.ellipse((68, 54, 74, 60), fill=(255, 255, 255, 255))
-    d.ellipse((53, 72, 67, 84), fill=(212, 148, 150, 255))            # nose
-    return im, (60, 96)
+    d.ellipse((20, 22, 88, 92), fill=(158, 136, 112, 255))
+    d.ellipse((24, 8, 48, 34), fill=(136, 114, 92, 255))              # ears
+    d.ellipse((60, 8, 84, 34), fill=(136, 114, 92, 255))
+    d.ellipse((30, 12, 44, 28), fill=(196, 168, 150, 255))
+    d.ellipse((64, 12, 78, 28), fill=(196, 168, 150, 255))
+    d.ellipse((34, 44, 48, 62), fill=INK)                             # eyes
+    d.ellipse((58, 44, 72, 62), fill=INK)
+    d.ellipse((37, 47, 43, 53), fill=(255, 255, 255, 255))
+    d.ellipse((61, 47, 67, 53), fill=(255, 255, 255, 255))
+    d.ellipse((46, 64, 60, 76), fill=(212, 148, 150, 255))            # nose
+    return im, (54, 86)
 
 
 def _draw_squirrel_tail():
-    w, h = 120, 220
+    """A tapering plume arcing up and back. Sized against the body — a palm
+    squirrel's tail is about as long as it is, not three times."""
+    w, h = 170, 210
     im = _img(w, h)
     d = ImageDraw.Draw(im)
-    for i, y in enumerate(range(150, 10, -26)):                       # bushy plume
-        r = 26 + i * 5
-        d.ellipse((60 - r, y - r * 0.8, 60 + r, y + r * 0.8),
-                  fill=(160, 138, 112, 255))
-    return im, (60, 176)
+    base = (118, 190)
+    for i in range(16):                                               # outer plume
+        f = i / 15.0
+        ang = math.radians(-96 + f * 96)                              # arcs backward
+        dist = 20 + f * 132
+        x = base[0] - dist * math.sin(ang) * 0.85
+        y = base[1] - dist * math.cos(ang) * 0.92
+        r = 15 + 20 * math.sin(f * math.pi * 0.85)
+        d.ellipse((x - r, y - r, x + r, y + r), fill=(160, 138, 112, 255))
+    for i in range(12):                                               # lighter core
+        f = i / 11.0
+        ang = math.radians(-92 + f * 92)
+        dist = 24 + f * 116
+        x = base[0] - dist * math.sin(ang) * 0.85
+        y = base[1] - dist * math.cos(ang) * 0.92
+        r = 7 + 9 * math.sin(f * math.pi * 0.8)
+        d.ellipse((x - r, y - r, x + r, y + r), fill=(186, 166, 138, 255))
+    return im, base
 
 
 def build_chikoo():
@@ -208,9 +230,9 @@ def build_chikoo():
     body, body_piv = _draw_squirrel_body()
     head, head_piv = _draw_squirrel_head()
     tail, tail_piv = _draw_squirrel_tail()
-    rig.add(Part('tail', tail, tail_piv, 'body', (58, 132), z=5))
+    rig.add(Part('tail', tail, tail_piv, 'body', (52, 140), z=5))
     rig.add(Part('body', body, body_piv, z=10))
-    rig.add(Part('head', head, head_piv, 'body', (72, 52), z=20))
+    rig.add(Part('head', head, head_piv, 'body', (74, 46), z=20))
     return rig
 
 

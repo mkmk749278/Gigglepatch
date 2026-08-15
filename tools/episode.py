@@ -50,13 +50,15 @@ def chikoo_idle(seconds, question_at=None):
                            (3.5, -5), (4.2, 0), (seconds, -3)])
     a.track('head', 'rot', [(0, 0), (0.6, -12), (1.1, 6), (1.9, -8), (2.6, 2),
                             (3.6, -10), (seconds, 0)])
+    # Resting angle keeps the tail clear of the body — tucked flat it vanishes
+    # behind him and he loses his most recognisable feature.
     if question_at is not None:
-        a.track('tail', 'rot', [(0, -8), (question_at - 0.4, -8),
-                                (question_at, 46), (question_at + 1.6, 46),
-                                (question_at + 2.2, -4), (seconds, -8)])
+        a.track('tail', 'rot', [(0, 26), (question_at - 0.4, 26),
+                                (question_at, 64), (question_at + 1.6, 62),
+                                (question_at + 2.2, 30), (seconds, 26)])
     else:
-        a.track('tail', 'rot', [(0, -8), (1.2, 10), (2.4, -8), (3.6, 10),
-                                (seconds, -6)])
+        a.track('tail', 'rot', [(0, 26), (1.2, 38), (2.4, 24), (3.6, 36),
+                                (seconds, 28)])
     return a
 
 
@@ -75,7 +77,7 @@ def build_shots():
     cam1.track('y', [(0, STAGE[1] * 0.50), (7.0, STAGE[1] * 0.53)])
     shot1 = dict(name='courtyard', dur=7.0,
                  bg=scenes.courtyard(scenes.MORNING, STAGE),
-                 rigs=[(tara, idle(7.0))], camera=cam1, shadows=[(tara, 150)])
+                 rigs=[(tara, idle(7.0))], camera=cam1, shadows=[(tara, 150, 430)])
 
     # Shot 2 — walking Neem Lane, midday. Static camera, world slides past.
     cam2 = Camera(STAGE, OUT)
@@ -83,7 +85,7 @@ def build_shots():
     cam2.track('y', [(0, STAGE[1] * 0.54), (9.0, STAGE[1] * 0.54)])
     shot2 = dict(name='neem_lane', dur=9.0,
                  bg=scenes.scroller(scenes.neem_lane, scenes.MIDDAY, STAGE, 190),
-                 rigs=[(tara, walk_cycle(9.0))], camera=cam2, shadows=[(tara, 140)])
+                 rigs=[(tara, walk_cycle(9.0))], camera=cam2, shadows=[(tara, 140, 430)])
 
     # Shot 3 — the mango grove. Tara asks; Chikoo does not know either.
     cam3 = Camera(STAGE, OUT)
@@ -93,7 +95,7 @@ def build_shots():
     shot3 = dict(name='mango_grove', dur=10.0,
                  bg=scenes.mango_grove(scenes.MORNING, STAGE),
                  rigs=[(tara, call_out_pause()), (chikoo, chikoo_idle(10.0, 4.6))],
-                 camera=cam3, shadows=[(tara, 150), (chikoo, 60)])
+                 camera=cam3, shadows=[(tara, 150, 430), (chikoo, 62, 116)])
 
     # Shot 4 — the first lantern point lights. Pull back to the wide.
     cam4 = Camera(STAGE, OUT)
@@ -102,7 +104,7 @@ def build_shots():
     shot4 = dict(name='mango_grove_lit', dur=5.5,
                  bg=scenes.mango_grove(scenes.MORNING, STAGE),
                  rigs=[(tara_lit, idle(5.5)), (chikoo, chikoo_idle(5.5))],
-                 camera=cam4, shadows=[(tara_lit, 150), (chikoo, 60)])
+                 camera=cam4, shadows=[(tara_lit, 150, 430), (chikoo, 62, 116)])
 
     return [shot1, shot2, shot3, shot4]
 
@@ -111,7 +113,7 @@ def place_characters(shot):
     """Position each rig on the stage for this shot."""
     for i, (rig, _) in enumerate(shot['rigs']):
         if 'chikoo' in getattr(rig, 'tag', ''):
-            rig.root_pos = (STAGE[0] * 0.66, STAGE[1] * 0.855)
+            rig.root_pos = (STAGE[0] * 0.655, STAGE[1] * 0.770)
         else:
             rig.root_pos = (STAGE[0] * 0.44, STAGE[1] * 0.52)
     return shot
@@ -136,9 +138,10 @@ def render_sequence(out):
         for i in range(n):
             t = i / FPS
             bg = s['bg'](t) if callable(s['bg']) else s['bg'].copy()
-            for rig, radius in s.get('shadows', []):
+            for rig, radius, foot_drop in s.get('shadows', []):
                 x, y = rig.root_pos
-                scenes.ground_shadow(bg, x, y + 300, radius)
+                # the shadow belongs under the feet, not under the hips
+                scenes.ground_shadow(bg, x, y + foot_drop, radius)
             frame = render_shot(s['rigs'], OUT, t, background=bg, camera=s['camera'])
             proc.stdin.write(frame.convert('RGB').tobytes())
     proc.stdin.close()
