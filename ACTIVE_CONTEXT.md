@@ -1,5 +1,5 @@
 # GigglePatch — Active Context
-### Last updated: 2026-08-13
+### Last updated: 2026-08-15
 
 > Update this file whenever something changes. It is the single source of truth for what is happening right now.
 
@@ -7,9 +7,26 @@
 
 ## Current Status
 
-**Phase:** Evaluating production methods — character design NOT finalized, testing what
-gives reliable character consistency for adventure episodes
-**Immediate priority:** Decide the production route (see "Production Route Decision" below)
+**Phase:** Production route resolved for character shots — a working CPU animation
+pipeline now renders finished footage from a single plate.
+**Immediate priority:** Review `renders/dora_lantern_walk.mp4`, then decide the
+Dora naming question (see Blockers) before any publish.
+
+### Dora — cutout pipeline (new, working)
+
+A full shot pipeline lives in `pipeline/dora/`. It cuts **one** approved plate
+into a 14-bone puppet and animates it, so the design cannot drift between
+frames. It needs no GPU and no video model.
+
+What it produces: 1280x720 / 24fps, real motion blur, procedural parallax
+night-market backdrop, the star lantern lighting the scene and the street.
+
+Why it works where earlier attempts did not — the walk is *solved*, not swung:
+the planted ankle is moved linearly through stance and 2-bone IK derives the
+joints, so foot travel matches ground scroll (measured 14.0 vs 14.5 px/frame)
+and the skating that killed the earlier 2.5D tests is gone.
+
+Full notes and the trap list: `pipeline/dora/README.md`.
 
 ### Key finding from method testing
 
@@ -28,6 +45,7 @@ Methods tested (all code in `pipeline/`, notes in `pipeline/README.md`):
 | 2.5D cutout rig (IK, overlap, motion blur) | **perfect** | medium | only 2 fixed angles possible |
 | Image→3D (TripoSR, CPU) | n/a | unusable | single-image 3D gives a blob |
 | **CC0 rigged 3D + Blender** | **perfect** | medium (low-poly) | **true 360, real mocap** |
+| **Bone-rigged cutout from one plate** | **perfect** | **high — keeps the plate's render quality** | **in use for Dora; single camera angle per plate** |
 
 Negative results worth remembering:
 - Flux **cannot** produce a consistent multi-angle turnaround — it ignores angle
@@ -129,6 +147,11 @@ Flow Characters tab descriptions: `characters/character_descriptions.md`
 - Scout / "The Lost Map" shelved — replaced by The Midnight Market (stronger market positioning for 6–12 audience)
 - Flow character references confirmed — use these every session, do not regenerate from scratch
 - Chimki came out as a translucent crystal mouse with starlight inside — better than original concept, keep this design
+- ⚠️ **Dora's name is not cleared.** The visual design is original and safe; the
+  *name* collides with a well-known children's-TV explorer character. Rename
+  before publish — no art needs to change. See `FLOW_COMPLIANCE.md` §6.
+- The cutout pipeline animates one plate, so each plate gives one camera angle.
+  New angles need new approved plates, keyed and rigged the same way.
 
 ---
 
@@ -144,3 +167,7 @@ Flow Characters tab descriptions: `characters/character_descriptions.md`
 | 2026-08-13 | Series bible created for The Midnight Market (mystery + hidden magic, ages 6–12) |
 | 2026-08-13 | All three character reference images generated in Google Flow and confirmed |
 | 2026-08-13 | Character descriptions saved to episodes/the-midnight-market/characters/ |
+| 2026-08-15 | Dora plate pack received (20 images), keyed to RGBA in `assets/dora/plates/` |
+| 2026-08-15 | Built `pipeline/dora/` — bone-rigged cutout animation, CPU only |
+| 2026-08-15 | First finished shot rendered: `renders/dora_lantern_walk.mp4` |
+| 2026-08-15 | Flagged Dora naming risk in FLOW_COMPLIANCE.md |

@@ -1,0 +1,222 @@
+{
+ "pose_hold_lantern": {
+  "src": "Animated_character_holding_lantern_202608152146.jpeg",
+  "origin": [
+   495,
+   46
+  ],
+  "size": [
+   499,
+   698
+  ]
+ },
+ "ref_model_sheet": {
+  "src": "Animated_character_model_sheet_grid_202608152146.jpeg",
+  "origin": [
+   0,
+   0
+  ],
+  "size": [
+   1371,
+   765
+  ]
+ },
+ "head_profile": {
+  "src": "Animated_character_profile_portrait_202608152146.jpeg",
+  "origin": [
+   351,
+   31
+  ],
+  "size": [
+   654,
+   737
+  ]
+ },
+ "head_surprise": {
+  "src": "Animated_character_showing_surprise_202608152146.jpeg",
+  "origin": [
+   77,
+   21
+  ],
+  "size": [
+   1221,
+   723
+  ]
+ },
+ "head_smile_open": {
+  "src": "Animated_character_smiling_with_#U2026_202608152146.jpeg",
+  "origin": [
+   326,
+   33
+  ],
+  "size": [
+   705,
+   735
+  ]
+ },
+ "pose_back": {
+  "src": "Animated_character_standing_stra#U2026_202608152146.jpeg",
+  "origin": [
+   574,
+   35
+  ],
+  "size": [
+   229,
+   706
+  ]
+ },
+ "head_thinking": {
+  "src": "Animated_character_thinking_with#U2026_202608152146.jpeg",
+  "origin": [
+   201,
+   0
+  ],
+  "size": [
+   942,
+   768
+  ]
+ },
+ "head_curious": {
+  "src": "Animated_character_with_curious_#U2026_202608152146.jpeg",
+  "origin": [
+   336,
+   27
+  ],
+  "size": [
+   695,
+   741
+  ]
+ },
+ "head_smile_wide": {
+  "src": "Animated_girl_smiling_with_braids_202608152146.jpeg",
+  "origin": [
+   314,
+   13
+  ],
+  "size": [
+   987,
+   736
+  ]
+ },
+ "head_smile_soft": {
+  "src": "Character_with_braids_smiling_202608152146.jpeg",
+  "origin": [
+   432,
+   50
+  ],
+  "size": [
+   511,
+   718
+  ]
+ },
+ "pose_bending": {
+  "src": "Girl_bending_with_glowing_lantern_202608152146.jpeg",
+  "origin": [
+   288,
+   175
+  ],
+  "size": [
+   806,
+   566
+  ]
+ },
+ "pose_lantern_a": {
+  "src": "Girl_holding_glowing_star_lantern_202608152146.jpeg",
+  "origin": [
+   553,
+   70
+  ],
+  "size": [
+   270,
+   657
+  ]
+ },
+ "pose_lantern_b": {
+  "src": "Girl_holding_glowing_star_lantern_202608152146_2.jpeg",
+  "origin": [
+   458,
+   62
+  ],
+  "size": [
+   490,
+   668
+  ]
+ },
+ "pose_lantern_unlit": {
+  "src": "Girl_holding_unlit_lantern_202608152146.jpeg",
+  "origin": [
+   576,
+   80
+  ],
+  "size": [
+   339,
+   635
+  ]
+ },
+ "pose_turning": {
+  "src": "Girl_turning_with_star_lantern_202608152146.jpeg",
+  "origin": [
+   374,
+   63
+  ],
+  "size": [
+   590,
+   658
+  ]
+ },
+ "pose_walking": {
+  "src": "Girl_walking_with_lantern_202608152146.jpeg",
+  "origin": [
+   426,
+   71
+  ],
+  "size": [
+   491,
+   641
+  ]
+ },
+ "pose_premium_1": {
+  "src": "Premium_3D_CGI_animated_character,_202608152146.jpeg",
+  "origin": [
+   425,
+   38
+  ],
+  "size": [
+   526,
+   711
+  ]
+ },
+ "pose_premium_2": {
+  "src": "Premium_3D_CGI_animated_character_202608152146.jpeg",
+  "origin": [
+   438,
+   44
+  ],
+  "size": [
+   506,
+   703
+  ]
+ },
+ "sheet_visemes": {
+  "src": "Six_animated_mouth_shapes_displayed_202608152146.jpeg",
+  "origin": [
+   37,
+   291
+  ],
+  "size": [
+   1305,
+   193
+  ]
+ },
+ "sheet_lantern_glow": {
+  "src": "Star_lantern_glowing_sequentially_202608152146.jpeg",
+  "origin": [
+   65,
+   172
+  ],
+  "size": [
+   1245,
+   367
+  ]
+ }
+}

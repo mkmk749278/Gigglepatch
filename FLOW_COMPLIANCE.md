@@ -161,6 +161,16 @@ Run this check whenever adding a new character or before anyone asks "is Scout o
 - [x] Personal rain cloud detail — original
 - [x] Transformation arc (storm → sunbeam) — original emotional mechanic
 
+**Dora (working name — see naming flag below):**
+- [x] Visual design is original — Indian girl, teal embroidered kurta, white leggings, twin plaited braids with yellow bows, red mary-janes, bindi, jhumka earrings, pierced-metal star lantern
+- [x] No visual match to any existing trademarked character
+- [x] Star lantern and its glow stages are original to GigglePatch
+- [ ] ⚠️ **NAME NOT CLEARED.** "Dora" is the name of a well-known children's-TV
+      explorer character. The *visual* design here is unmistakably distinct, but a
+      young-girl adventure lead named Dora on a kids' channel invites a trademark
+      complaint on the name alone, and YouTube acts on those without adjudicating.
+      The art does not need to change — only the name. Decide before publish.
+
 **New characters:** Before introducing any new character, verify it has no visual match to existing trademarked characters. Document the distinguishing features in this file.
 
 ---
