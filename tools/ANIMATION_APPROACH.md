@@ -131,3 +131,107 @@ Two calibration lessons worth keeping:
 - **Freeze detection needs a rolling median.** Compression artifacts put
   isolated spikes inside a held frame, which split one long freeze into several
   short ones that then fall under the reporting threshold.
+
+---
+
+# The other route: cut-out puppet animation
+
+## How Dora was actually made
+
+**Not frame by frame.** Dora the Explorer was produced as **cut-out puppet
+animation in Adobe Flash**: each character is built *once* as a rig of separate
+pieces — head, torso, upper arm, forearm, thigh, shin, plus a library of
+swappable mouth shapes — connected in a hierarchy. Animation is then rotating
+and moving those pieces over time. The 2024 reboot moved to 3D CGI, same
+principle with a 3D rig instead of flat pieces.
+
+That is why hundreds of episodes were economically possible. Nobody redrew Dora
+for every frame; they posed a puppet.
+
+## Why this matters more than it sounds
+
+The artwork never changes between frames. So the character **physically cannot**
+drift, boil, age, or change costume — the failure modes that make per-frame
+image generation unusable do not exist in this technique. Not "are reduced".
+Do not exist.
+
+| | Per-frame generation | Flow | Cut-out puppet |
+|---|---|---|---|
+| Character consistency | Poor — drifts | Good within a shot | **Perfect, by construction** |
+| Cost per episode | Enormous | Moderate credits | **Zero** |
+| Control over exact pose | None | Indirect | **Total, to the frame** |
+| Policy risk | High | Low | **None** |
+| Runs offline | No | No | **Yes** |
+| Art effort up front | None | Low | **High — needs a part set** |
+| Camera moves, depth, lighting | Free | Free | Must be built |
+
+The cost is real and it is at the front: somebody has to produce clean character
+art cut into separate parts on transparent backgrounds. After that, every
+episode is free forever.
+
+## We have a working engine
+
+`tools/puppet.py` — the rig engine. Parts with pivots, parent/child hierarchy,
+keyframe tracks, easing, and direct render to MP4 through ffmpeg.
+
+`tools/tara_rig.py` — Tara as a 12-part puppet, and the CALL-OUT PAUSE animated
+over ten seconds at 24fps.
+
+```bash
+python3 tools/tara_rig.py out.mp4
+```
+
+Renders 240 frames at 1920×1080 in about seventy seconds on this machine, with
+no network and no credits.
+
+### What the proof clip contains
+
+Idle breathing → lantern lifted beside her face → head tilts into the question →
+**three full seconds of hold** → wave → settle. That is the exact beat that
+appears three times in every episode of the series.
+
+### What it proves
+
+- The hierarchy works: rotate the torso and the head, braids, arms and lantern
+  all follow
+- Follow-through works: the braids lag behind the head, which is what sells
+  weight
+- The lantern stays upright in world space while the arm rotates underneath it,
+  because it hangs from a ring handle
+- `continuity_check.py` reports it clean apart from the deliberate three-second
+  hold, which it correctly identifies as a FREEZE
+
+### The art is placeholder, and deliberately so
+
+Every part is drawn in code as flat shapes, so the pipeline runs today with
+nothing to download. To move to real art, replace each `_draw_*` function with a
+PNG loaded from `series-tara/reference/parts/`, keep the pivot and attach
+points, and **every animation in the file keeps working unchanged**. That
+separation is the entire point of a rig: art and performance are independent.
+
+### What a real part set needs
+
+Generated in ImageFX, each on a transparent background, in a consistent style:
+
+```
+head_front.png      torso.png         upper_arm.png     forearm_hand.png
+head_3quarter.png   braid.png         thigh.png         shin_shoe.png
+mouth_*.png (a set of shapes for speech)   lantern_unlit.png / lantern_lit.png
+```
+
+Flat, even lighting, no baked shadows — the rig supplies the motion, so the art
+must not carry any.
+
+## Which route to take
+
+They are not exclusive, and the honest answer is that they suit different shots:
+
+- **Flow** for establishing shots, scenery, atmosphere, anything with real
+  depth, camera movement or complex lighting — the things a flat puppet cannot
+  do
+- **Puppet** for character performance: dialogue, the CALL-OUT PAUSE, reactions,
+  anything repeated every episode where consistency matters more than spectacle
+
+A series that used the puppet for its recurring character beats and Flow for its
+wide shots would be cheaper, more consistent and faster to produce than either
+approach alone.

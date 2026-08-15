@@ -60,7 +60,8 @@ Scout is paused, not cancelled. "The Lost Map" is fully written and unstarted in
 | Character bible | ✅ `series-tara/CHARACTER_BIBLE.md` |
 | Reference image prompts | ✅ `series-tara/CHARACTER_REFERENCE_PROMPTS.md` |
 | Reference images generated | ⬜ Start with Tara, 8+ attempts |
-| **10-second test shot** | ⬜ **DO THIS FIRST — `series-tara/TEST_SHOT.md`** |
+| **10-second test shot** | ⬜ Flow route — `series-tara/TEST_SHOT.md` |
+| Cut-out puppet engine | ✅ `tools/puppet.py` + `tools/tara_rig.py` — 10s clip renders offline |
 | IP safety documented in FLOW_COMPLIANCE §6 | ✅ Done |
 | Series format doc | ✅ `series-tara/SERIES_FORMAT.md` |
 | Episode 1 shot block | ✅ `series-tara/ep01-three-things/tara_ep01.md` (32 shots) |
@@ -131,6 +132,8 @@ _(Add anything that's stuck, half-done, or needs a decision here)_
 | 2026-08-15 | Added `tools/continuity_check.py` — automated frame-to-frame QC for Flow shots (jump/flicker/drift/freeze), validated against injected defects |
 | 2026-08-15 | `tools/ANIMATION_APPROACH.md` — why frame-by-frame generation is not the method, and which parts of that workflow we do keep |
 | 2026-08-15 | `series-tara/TEST_SHOT.md` — one 10-second clip to validate Tara before committing to 32 shots |
+| 2026-08-15 | Built a cut-out puppet engine — the technique Dora actually used. 12-part Tara rig, CALL-OUT PAUSE animated, 240 frames at 1080p rendered offline with no credits |
+| 2026-08-15 | continuity_check JUMP now compares each frame to its local neighbourhood, so a real gesture in a still shot no longer reads as a discontinuity |
 
 ---
 

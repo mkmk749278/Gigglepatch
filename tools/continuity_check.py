@@ -98,10 +98,22 @@ def analyse(path, jump_z=4.0, flicker=0.055, drift_thresh=0.45):
     # the reference for "how much this clip normally changes".
     ref = float(np.percentile(diffs, 75)) or med or 1e-6
 
-    # --- JUMP: a spike well outside this clip's own normal rate of change ---
+    # --- JUMP: an isolated spike, judged against its own neighbourhood ---
+    # A gesture is *sustained* elevated change over many frames; a real
+    # discontinuity is one frame that does not belong. Comparing against the
+    # clip's global median flags every genuine movement in an otherwise still
+    # shot, so compare each frame to its local neighbours instead, excluding
+    # itself.
+    half = 6
     for i, d in enumerate(diffs):
-        z = (d - med) / (1.4826 * mad)
-        if z > jump_z and d > med * 2.0:
+        lo, hi = max(0, i - half), min(len(diffs), i + half + 1)
+        neigh = np.concatenate([diffs[lo:i], diffs[i + 1:hi]])
+        if len(neigh) < 4:
+            continue
+        nmed = float(np.median(neigh))
+        nmad = float(np.median(np.abs(neigh - nmed))) or 1e-6
+        z = (d - nmed) / (1.4826 * nmad)
+        if z > jump_z and d > nmed * 2.0 and d > med * 1.5:
             findings.append(dict(kind='JUMP', frame=i + 2,
                                  time=round((i + 1) / fps, 2), score=round(float(z), 1)))
 
