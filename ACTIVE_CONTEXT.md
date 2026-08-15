@@ -2,6 +2,8 @@
 ### Last updated: 2026-08-15
 
 > Update this file whenever something changes. It is the single source of truth for what is happening right now.
+>
+> New here? Read `HANDOFF.md` first — it explains why things are the way they are.
 
 ---
 
@@ -181,6 +183,7 @@ _(Add anything that's stuck, half-done, or needs a decision here)_
 | 2026-08-15 | Tara's A-pose regenerated correctly and cut into 6 rig parts; `tools/tara_photo_rig.py` builds her from the real artwork and the zero-rotation assembly is seamless |
 | 2026-08-15 | CALL-OUT PAUSE re-rendered with the generated art, animation unchanged — the rig's art/performance split held |
 | 2026-08-15 | autorig: arm crops no longer carry a full-height strip of tunic from the torso overlap |
+| 2026-08-15 | `HANDOFF.md` written — project state, both production routes, hard-won lessons, open decisions |
 
 ---
 

@@ -172,6 +172,7 @@ Quick rules:
 
 ```
 CLAUDE.md                          ← this file (project reference for Claude)
+HANDOFF.md                         ← project state, routes, lessons, open decisions
 ACTIVE_CONTEXT.md                  ← current production status (update constantly)
 FLOW_COMPLIANCE.md                 ← Google Flow & Flow Music T&C rules for prompts
 series-tara/                       ← PRIMARY SERIES
