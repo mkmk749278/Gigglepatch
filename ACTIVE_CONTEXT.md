@@ -57,6 +57,8 @@ Scout is paused, not cancelled. "The Lost Map" is fully written and unstarted in
 | Item | Status |
 |------|--------|
 | Character bible | ✅ `series-tara/CHARACTER_BIBLE.md` |
+| Reference image prompts | ✅ `series-tara/CHARACTER_REFERENCE_PROMPTS.md` |
+| Reference images generated | ⬜ **NEXT — start with Tara, 8+ attempts** |
 | IP safety documented in FLOW_COMPLIANCE §6 | ✅ Done |
 | Series format doc | ✅ `series-tara/SERIES_FORMAT.md` |
 | Episode 1 shot block | ✅ `series-tara/ep01-three-things/tara_ep01.md` (32 shots) |
@@ -82,7 +84,10 @@ jaggery (clap three times). Ends by leaving a sweet on the wall for Kaaki.
 
 ## Open Tasks
 
-- [ ] Tara: generate Ep. 1 Flow clips (Tara alone first, then the rest)
+- [ ] Tara: generate reference images in ImageFX/Whisk — Tara first, lock her before anything else
+- [ ] Tara: save keepers into `series-tara/reference/` with the fixed filenames
+- [ ] Tara: upload references to the Flow Characters tab
+- [ ] Tara: generate Ep. 1 Flow clips
 - [ ] Tara: decide voice route, then record/synthesise the VO track
 - [ ] Tara: generate Ep. 1 music (BPM 96 acoustic prompt)
 - [ ] Tara: assemble, compress, upload Ep. 1 — Made for Kids **Yes**, AI disclosure **Yes**
@@ -118,6 +123,7 @@ _(Add anything that's stuck, half-done, or needs a decision here)_
 | 2026-08-15 | Tara Ep. 1 "Three Things for Ammamma" — 32-shot Flow block, VO script, trim guide, music prompt, metadata |
 | 2026-08-15 | Tara made the channel's primary series; Scout line paused and preserved, not deleted |
 | 2026-08-15 | Tara Ep. 2 "The Kite on the Wire" — 32 shots; Kaaki turns from taker into helper |
+| 2026-08-15 | Character reference image prompts written for all six plus the lantern prop, with accept/reject checklists |
 
 ---
 
