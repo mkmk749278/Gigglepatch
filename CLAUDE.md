@@ -10,7 +10,7 @@ All video is AI-generated on mobile using Google Flow + Flow Music + ffmpeg. No 
 - **Name:** GigglePatch
 - **Handle:** @Gigglepatch7492
 - **URL:** https://www.youtube.com/channel/UCPn8z0XQ2ykv3Rt_Oexn9wQ
-- **Content mix:** Kids songs (broad reach, Made for Kids) + Scout adventure episodes (general audience)
+- **Content mix:** *Tara and the Star Lantern* — interactive preschool series (primary) + kids songs (broad reach). Scout adventures are paused
 - **Cadence:** 1 new video per week minimum
 
 ---
@@ -25,7 +25,28 @@ ffmpeg (mobile)                → Concatenate clips, merge music, compress unde
 
 ---
 
-## Characters
+## Primary Series — Tara and the Star Lantern
+
+Interactive preschool, Made for Kids: **Yes**. This is the channel's main line.
+
+- Cast, world and Flow anti-drift descriptions: `series-tara/CHARACTER_BIBLE.md`
+- Episode skeleton and interactive rules: `series-tara/SERIES_FORMAT.md`
+- Episodes: `series-tara/ep*/`
+
+**Cast:** Tara (5, lead) · Ravi (5, friend) · Chikoo (palm squirrel) ·
+Kaaki (crow, the taker) · Nandu (water buffalo) · Ammamma (grandmother)
+
+**Never in a Tara prompt:** *realistic*, *photoreal*, *real child*, *live
+action*, *photograph*. These are stylised animated characters. See
+`FLOW_COMPLIANCE.md` §6.
+
+---
+
+## Characters — Scout line (PAUSED)
+
+> Scout and Grimble are not in active production. Episode 1 "The Lost Map" is
+> written and unstarted in `episodes/ep01-the-lost-map/`. Everything below is
+> preserved for when it resumes. Do not delete.
 
 ### Scout (hero)
 
@@ -151,9 +172,17 @@ Quick rules:
 
 ```
 CLAUDE.md                          ← this file (project reference for Claude)
+HANDOFF.md                         ← project state, routes, lessons, open decisions
 ACTIVE_CONTEXT.md                  ← current production status (update constantly)
 FLOW_COMPLIANCE.md                 ← Google Flow & Flow Music T&C rules for prompts
-episodes/
+series-tara/                       ← PRIMARY SERIES
+  CHARACTER_BIBLE.md               ← cast, world, Flow anti-drift descriptions
+  SERIES_FORMAT.md                 ← episode skeleton, interactive rules
+  ep01-three-things/
+    tara_ep01.md                   ← 32-shot block + VO script + music + metadata
+  ep02-kite-on-the-wire/
+    tara_ep02.md
+episodes/                          ← Scout line (PAUSED)
   ep01-the-lost-map/
     scout_adventure_v4.md          ← full 28-shot Flow prompt block + metadata
     scout_adventure_v4_twoblock.md ← same episode split into two blocks

@@ -23,6 +23,17 @@
 |------|-------------|---------------|----------------------|
 | Google Flow (video) | Google AI Pro | ✅ Allowed | ✅ Allowed |
 | Flow Music / Lyria | Google AI Pro | ✅ Allowed | ✅ Allowed |
+| ImageFX / Whisk (stills) | Google AI Pro | ✅ Allowed | ✅ Allowed |
+| Nano Banana — Gemini 2.5 Flash Image | Gemini / Google AI | ✅ Allowed | ✅ Allowed |
+
+**Nano Banana** is a Google generative image model, so everything in this
+document applies to it unchanged — including §2's ban on realistic depictions of
+children. Its outputs carry the same SynthID watermark. Confirm your own
+subscription tier covers commercial use before publishing from it.
+
+It is the preferred tool for character art because it holds a character across
+generations and accepts editing instructions on an image it already produced,
+which is what a cut-out rig needs. See `series-tara/NANO_BANANA_PROMPTS.md`.
 
 **Key distinction:** Google grants a license to use and monetize outputs. Google retains ownership of the underlying AI models. We do not own the raw AI output as copyright — we own the creative direction, editing, and the final assembled video as a human-authored work.
 
@@ -161,7 +172,74 @@ Run this check whenever adding a new character or before anyone asks "is Scout o
 - [x] Personal rain cloud detail — original
 - [x] Transformation arc (storm → sunbeam) — original emotional mechanic
 
+**Tara** (preschool series — see `series-tara/CHARACTER_BIBLE.md`):
+- [x] Two long braids with ribbons → no bob haircut, no fringe
+- [x] Carries a star lantern → never a backpack, never a talking map
+- [x] Teal/white/red palette → not pink-top-and-orange-shorts
+- [x] Stylised CGI proportions, explicit NOT-photorealistic clause → not a real child
+- [x] "Tara" is a common given word meaning "star" — not a protected mark
+
+**Chikoo** (Tara's companion):
+- [x] Indian palm squirrel, NOT a monkey → no sidekick collision
+- [x] Three cream back stripes → not a chipmunk, not a grey park squirrel
+- [x] No boots, no clothing, no upright anthropomorphic posture
+- [x] Wordless → no catchphrase that could collide
+
+**Kaaki** (Tara's antagonist):
+- [x] Bird, NOT a fox → no antagonist collision
+- [x] Grey neck collar → house crow, not a raven or any known corvid character
+- [x] Stopped by the viewer clapping three times → physical mechanic, no spoken
+      catchphrase that could echo an existing one
+- [x] Explicitly comic and non-menacing → safe for preschool
+
+**Ravi** (Tara's friend):
+- [x] Glasses + buttoned checked shirt + cloth shoulder bag → no visual match to
+      any known preschool-show sidekick
+- [x] Stylised CGI child, explicit NOT-photorealistic clause
+
+**Nandu** (water buffalo):
+- [x] Water buffalo → no existing preschool-character match
+- [x] Crescent backswept horns + slate hide → not cattle, not bison
+- [x] Explicitly non-aggressive, never charging
+- [x] Deliberately not a cow — avoids depicting cattle comically
+
+**Ammamma** (Tara's grandmother): original design; replaces the talking-map
+device with a human quest-giver — different expression of the same structure.
+
+### Reference images from other shows
+
+Someone will eventually paste a frame or poster from an existing series as a
+"make it look like this" reference. Split it in two before acting:
+
+| Free to copy | Never copy |
+|---|---|
+| Render quality — gloss, lighting, eye highlights, skin warmth | Any character's face, hair, clothing or silhouette |
+| Colour richness and contrast | A show's logo, title treatment or name |
+| Composition and posing conventions | A recognisable companion character |
+| Overall production polish | Signature props (a specific backpack, a talking map) |
+
+**Never upload a frame containing another show's character into a Flow character
+reference slot.** Describe the *look* in words instead. If a generated result
+resembles a known character, discard it.
+
+### Format vs. expression
+
+Story formats and structures are not copyrightable — only specific expression
+is. Interactive direct address, a three-stop journey, a thing-taking antagonist
+and a celebratory ending are all free to use. Named characters, their designs,
+their catchphrases and their songs are not. Every Tara character above is
+deliberately built away from its nearest counterpart.
+
 **New characters:** Before introducing any new character, verify it has no visual match to existing trademarked characters. Document the distinguishing features in this file.
+
+### Preschool series — extra prompt rule
+
+Tara's cast are stylised animated children and adults, never realistic humans.
+Never write *realistic*, *photoreal*, *real child*, *live action*, *photograph*
+or *8K photo* in a Tara prompt, and never upload a real child's photo as a Flow
+character reference. Discard any shot that returns looking photographic. Per §2,
+realistic synthetic humans are an absolute prohibition — stylised animation is
+the compliant route to the same result.
 
 ---
 
