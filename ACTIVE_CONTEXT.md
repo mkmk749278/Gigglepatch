@@ -90,11 +90,21 @@ a separate line and the two never share an episode.
 |------|--------|
 | Character bible | ✅ `series-tara/CHARACTER_BIBLE.md` |
 | IP safety documented in FLOW_COMPLIANCE §6 | ✅ Done |
-| Series format doc | ⬜ Not started |
-| Episode 1 shot block | ⬜ Not started |
-| Music prompt (preschool tone) | ⬜ Not started |
+| Series format doc | ✅ `series-tara/SERIES_FORMAT.md` |
+| Episode 1 shot block | ✅ `series-tara/ep01-three-things/tara_ep01.md` (32 shots) |
+| Music prompt (preschool tone) | ✅ In the Ep. 1 file — BPM 96, acoustic |
+| Ep. 1 Flow generation | ⬜ Not started — generate Tara alone first |
+| VO recording / TTS decision | ⬜ **Blocked on a decision — see below** |
+
+**Ep. 1 — "Three Things for Ammamma":** Ammamma needs three things. Mangoes from
+the grove (count them), Nandu blocks Neem Lane (make a plan), Kaaki takes the
+jaggery (clap three times). Ends by leaving a sweet on the wall for Kaaki.
 
 **Decisions still needed:**
+- **The voice.** This format needs speech — an interactive show cannot work
+  silently the way Scout does. Record it, use TTS, or go near-wordless and lose
+  most of the format's value. VO script is written and can be added to finished
+  clips without regenerating anything, so this does not block Flow generation
 - Confirm character names and series title
 - Second-language layer deferred — series works in English, Indian identity
   carried by setting and characters rather than vocabulary
@@ -107,8 +117,9 @@ a separate line and the two never share an episode.
 - [ ] Generate Episode 1 music
 - [ ] Complete Episode 1 post-production and upload
 - [ ] Plan Episode 2 prompt blocks
-- [ ] Tara: write series format doc
-- [ ] Tara: write Episode 1 shot block
+- [ ] Tara: generate Ep. 1 Flow clips (Tara alone first, then the rest)
+- [ ] Tara: decide voice route, then record/synthesise the VO track
+- [ ] Tara: generate Ep. 1 music (BPM 96 acoustic prompt)
 
 ---
 
@@ -131,3 +142,5 @@ _(Add anything that's stuck, half-done, or needs a decision here)_
 | 2026-08-15 | New preschool series designed — character bible for Tara, Chikoo, Kaaki, Ammamma |
 | 2026-08-15 | FLOW_COMPLIANCE §6 extended — IP safety checks for the Tara cast, plus preschool prompt rule barring realistic-human language |
 | 2026-08-15 | Tara cast expanded to six (added Ravi, Nandu) and world/setting bible written; language layer deferred |
+| 2026-08-15 | Tara series format doc written — seven-beat skeleton, three interactive beats, series music direction |
+| 2026-08-15 | Tara Ep. 1 "Three Things for Ammamma" — 32-shot Flow block, VO script, trim guide, music prompt, metadata |
