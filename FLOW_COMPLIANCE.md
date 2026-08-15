@@ -161,7 +161,47 @@ Run this check whenever adding a new character or before anyone asks "is Scout o
 - [x] Personal rain cloud detail — original
 - [x] Transformation arc (storm → sunbeam) — original emotional mechanic
 
+**Tara** (preschool series — see `series-tara/CHARACTER_BIBLE.md`):
+- [x] Two long braids with ribbons → no bob haircut, no fringe
+- [x] Carries a star lantern → never a backpack, never a talking map
+- [x] Teal/white/red palette → not pink-top-and-orange-shorts
+- [x] Stylised CGI proportions, explicit NOT-photorealistic clause → not a real child
+- [x] "Tara" is a common given word meaning "star" — not a protected mark
+
+**Chikoo** (Tara's companion):
+- [x] Indian palm squirrel, NOT a monkey → no sidekick collision
+- [x] Three cream back stripes → not a chipmunk, not a grey park squirrel
+- [x] No boots, no clothing, no upright anthropomorphic posture
+- [x] Wordless → no catchphrase that could collide
+
+**Kaaki** (Tara's antagonist):
+- [x] Bird, NOT a fox → no antagonist collision
+- [x] Grey neck collar → house crow, not a raven or any known corvid character
+- [x] Stopped by the viewer clapping three times → physical mechanic, no spoken
+      catchphrase that could echo an existing one
+- [x] Explicitly comic and non-menacing → safe for preschool
+
+**Ammamma** (Tara's grandmother): original design; replaces the talking-map
+device with a human quest-giver — different expression of the same structure.
+
+### Format vs. expression
+
+Story formats and structures are not copyrightable — only specific expression
+is. Interactive direct address, a three-stop journey, a thing-taking antagonist
+and a celebratory ending are all free to use. Named characters, their designs,
+their catchphrases and their songs are not. Every Tara character above is
+deliberately built away from its nearest counterpart.
+
 **New characters:** Before introducing any new character, verify it has no visual match to existing trademarked characters. Document the distinguishing features in this file.
+
+### Preschool series — extra prompt rule
+
+Tara's cast are stylised animated children and adults, never realistic humans.
+Never write *realistic*, *photoreal*, *real child*, *live action*, *photograph*
+or *8K photo* in a Tara prompt, and never upload a real child's photo as a Flow
+character reference. Discard any shot that returns looking photographic. Per §2,
+realistic synthetic humans are an absolute prohibition — stylised animation is
+the compliant route to the same result.
 
 ---
 

@@ -1,5 +1,5 @@
 # GigglePatch — Active Context
-### Last updated: 2026-08-13
+### Last updated: 2026-08-15
 
 > Update this file whenever something changes. It is the single source of truth for what is happening right now.
 
@@ -7,8 +7,20 @@
 
 ## Current Status
 
-**Phase:** Episode 1 production — in progress
+**Phase:** Two content lines running in parallel
 **Immediate priority:** Generate Flow clips for "The Lost Map" (Scout vs. Grimble, Ep. 1)
+**New:** Second series in design — *Tara and the Star Lantern*, interactive preschool
+
+### Content lines
+
+| Line | Audience | Made for Kids | Status |
+|------|----------|---------------|--------|
+| Kids songs | Broad | Yes | 2 uploaded |
+| Scout adventures | General audience | **No** | Ep. 1 in production |
+| Tara (preschool) | Ages 2–5 | **Yes** | Characters designed |
+
+Scout's positioning is unchanged — general audience, "not a baby show." Tara is
+a separate line and the two never share an episode.
 
 ---
 
@@ -67,12 +79,35 @@
 
 ---
 
+## Tara Series — Design Tracker
+
+**Format:** Interactive preschool — direct address, pause-for-answer, three-stop journey
+**Cast:** Tara (lead) · Chikoo (palm squirrel) · Kaaki (crow, the taker) · Ammamma (grandmother)
+**Device:** Five-point brass star lantern — three points light per episode, one per stop
+
+| Item | Status |
+|------|--------|
+| Character bible | ✅ `series-tara/CHARACTER_BIBLE.md` |
+| IP safety documented in FLOW_COMPLIANCE §6 | ✅ Done |
+| Series format doc | ⬜ Not started |
+| Episode 1 shot block | ⬜ Not started |
+| Music prompt (preschool tone) | ⬜ Not started |
+
+**Decisions still needed:**
+- Teaching language — **Telugu or Hindi?** Changes every episode script
+- Confirm character names (Tara / Chikoo / Kaaki / Ammamma)
+- Confirm series title
+
+---
+
 ## Open Tasks
 
 - [ ] Generate Episode 1 Flow clips (Block 1 → Block 2)
 - [ ] Generate Episode 1 music
 - [ ] Complete Episode 1 post-production and upload
 - [ ] Plan Episode 2 prompt blocks
+- [ ] Tara: decide teaching language, then write series format doc
+- [ ] Tara: write Episode 1 shot block
 
 ---
 
@@ -92,3 +127,5 @@ _(Add anything that's stuck, half-done, or needs a decision here)_
 | 2026-08-13 | Created ep01 shot blocks (28 shots, two-block split) and music prompt |
 | 2026-08-13 | Music prompt updated to fast electro + vocal hook (BPM 132) |
 | 2026-08-13 | Scout character description reordered — braids/boots first to avoid Sonic association in Flow |
+| 2026-08-15 | New preschool series designed — character bible for Tara, Chikoo, Kaaki, Ammamma |
+| 2026-08-15 | FLOW_COMPLIANCE §6 extended — IP safety checks for the Tara cast, plus preschool prompt rule barring realistic-human language |
