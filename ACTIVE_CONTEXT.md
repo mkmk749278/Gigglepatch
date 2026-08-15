@@ -84,6 +84,7 @@ jaggery (clap three times). Ends by leaving a sweet on the wall for Kaaki.
 
 ## Open Tasks
 
+- [ ] Tara: run `tools/continuity_check.py` over every Flow shot before assembly
 - [ ] Tara: generate reference images in ImageFX/Whisk — Tara first, lock her before anything else
 - [ ] Tara: save keepers into `series-tara/reference/` with the fixed filenames
 - [ ] Tara: upload references to the Flow Characters tab
@@ -124,6 +125,8 @@ _(Add anything that's stuck, half-done, or needs a decision here)_
 | 2026-08-15 | Tara made the channel's primary series; Scout line paused and preserved, not deleted |
 | 2026-08-15 | Tara Ep. 2 "The Kite on the Wire" — 32 shots; Kaaki turns from taker into helper |
 | 2026-08-15 | Character reference image prompts written for all six plus the lantern prop, with accept/reject checklists |
+| 2026-08-15 | Added `tools/continuity_check.py` — automated frame-to-frame QC for Flow shots (jump/flicker/drift/freeze), validated against injected defects |
+| 2026-08-15 | `tools/ANIMATION_APPROACH.md` — why frame-by-frame generation is not the method, and which parts of that workflow we do keep |
 
 ---
 
