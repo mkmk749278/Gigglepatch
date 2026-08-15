@@ -181,6 +181,17 @@ Run this check whenever adding a new character or before anyone asks "is Scout o
       catchphrase that could echo an existing one
 - [x] Explicitly comic and non-menacing → safe for preschool
 
+**Ravi** (Tara's friend):
+- [x] Glasses + buttoned checked shirt + cloth shoulder bag → no visual match to
+      any known preschool-show sidekick
+- [x] Stylised CGI child, explicit NOT-photorealistic clause
+
+**Nandu** (water buffalo):
+- [x] Water buffalo → no existing preschool-character match
+- [x] Crescent backswept horns + slate hide → not cattle, not bison
+- [x] Explicitly non-aggressive, never charging
+- [x] Deliberately not a cow — avoids depicting cattle comically
+
 **Ammamma** (Tara's grandmother): original design; replaces the talking-map
 device with a human quest-giver — different expression of the same structure.
 

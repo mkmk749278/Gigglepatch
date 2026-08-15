@@ -82,7 +82,8 @@ a separate line and the two never share an episode.
 ## Tara Series — Design Tracker
 
 **Format:** Interactive preschool — direct address, pause-for-answer, three-stop journey
-**Cast:** Tara (lead) · Chikoo (palm squirrel) · Kaaki (crow, the taker) · Ammamma (grandmother)
+**Cast:** Tara (lead) · Ravi (friend) · Chikoo (palm squirrel) · Kaaki (crow, the taker) · Nandu (water buffalo) · Ammamma (grandmother)
+**World:** Small town at the edge of fields — Blue Door House, Banyan Court, Neem Lane, Stepwell, Mango Grove, Water Tank, Rooftops, Market Lane
 **Device:** Five-point brass star lantern — three points light per episode, one per stop
 
 | Item | Status |
@@ -94,9 +95,9 @@ a separate line and the two never share an episode.
 | Music prompt (preschool tone) | ⬜ Not started |
 
 **Decisions still needed:**
-- Teaching language — **Telugu or Hindi?** Changes every episode script
-- Confirm character names (Tara / Chikoo / Kaaki / Ammamma)
-- Confirm series title
+- Confirm character names and series title
+- Second-language layer deferred — series works in English, Indian identity
+  carried by setting and characters rather than vocabulary
 
 ---
 
@@ -106,7 +107,7 @@ a separate line and the two never share an episode.
 - [ ] Generate Episode 1 music
 - [ ] Complete Episode 1 post-production and upload
 - [ ] Plan Episode 2 prompt blocks
-- [ ] Tara: decide teaching language, then write series format doc
+- [ ] Tara: write series format doc
 - [ ] Tara: write Episode 1 shot block
 
 ---
@@ -129,3 +130,4 @@ _(Add anything that's stuck, half-done, or needs a decision here)_
 | 2026-08-13 | Scout character description reordered — braids/boots first to avoid Sonic association in Flow |
 | 2026-08-15 | New preschool series designed — character bible for Tara, Chikoo, Kaaki, Ammamma |
 | 2026-08-15 | FLOW_COMPLIANCE §6 extended — IP safety checks for the Tara cast, plus preschool prompt rule barring realistic-human language |
+| 2026-08-15 | Tara cast expanded to six (added Ravi, Nandu) and world/setting bible written; language layer deferred |

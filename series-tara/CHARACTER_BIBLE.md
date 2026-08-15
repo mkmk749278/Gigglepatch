@@ -11,10 +11,15 @@ audience, Made for Kids: No, "not a baby show." These two never share an episode
 ## Why This Series Exists
 
 There is very little English-language preschool content built around Indian
-daily life. The gap is real and the teaching content writes itself — Telugu and
-Hindi words, Indian counting, festivals, food, birds and animals a child in
-Hyderabad actually sees. Being culturally specific is what differentiates this
-from every other explorer show. It stops the comparison instead of inviting it.
+daily life. Being culturally specific is what differentiates this from every
+other explorer show — it stops the comparison instead of inviting it.
+
+**The series is in English.** Indian identity comes through what is on screen:
+the courtyard house, the banyan tree, the stepwell, the animals on the compound
+wall, the food, the festivals, the light. Not through vocabulary lessons.
+
+A second-language teaching layer can be added later if wanted, but nothing in
+this bible depends on it, and no episode needs it to work.
 
 ---
 
@@ -258,14 +263,104 @@ child is worrying about.
 
 ### Personality
 
-She never solves the problem. She gives the three stops and a piece of practical
-knowledge, then steps back. She is where the Telugu or Hindi word of the episode
-comes from — taught naturally, in context, because a grandmother teaching a word
-to a grandchild is simply what happens.
+She never solves the problem. She gives the three stops and one piece of
+practical knowledge — how to tell if a mango is ripe, which way the birds fly
+before rain, why the stepwell water is cold — then steps back. Grandmother
+knowledge, the kind a child actually absorbs by being told once while walking.
 
 ---
 
-## 5. THE STAR LANTERN — the structural device
+## 5. RAVI — the neighbour
+
+**Age 5. Cautious where Tara is bold. Her best friend.**
+
+A preschool cast needs a peer, not just a pet and a grown-up. Ravi exists so
+Tara has someone her own size to explain things to — which is really how she
+explains things to the viewer without it feeling like a lecture. He is also the
+one who says "are you sure?", which lets the show model hesitation and courage
+in the same scene rather than only ever showing fearlessness.
+
+### Flow Characters tab — paste this exactly
+
+> Round black-rimmed glasses slightly too big for his face. A blue-and-white
+> checked cotton shirt buttoned all the way up, tucked into khaki shorts, with
+> brown leather sandals. Hair neatly oiled and combed flat with a side parting.
+> Carries a small cloth shoulder bag across the body. Warm brown skin, round
+> face, slightly worried eyebrows that lift when he is excited. A young child of
+> five — small, short, round-faced, clearly a little kid, NOT a teenager, NOT an
+> adult. Careful, thoughtful posture; stands with hands together or holding the
+> bag strap. 3D CGI animated style, DreamWorks and Pixar theatrical animated
+> film quality. Stylised cartoon proportions with a slightly large head — NOT
+> photorealistic, NOT a real child, NOT live action, NOT flat 2D.
+
+### Why this order
+
+**Glasses lead** — they are the single fastest silhouette-level read, and they
+separate him instantly from Tara at thumbnail size. The **buttoned-up checked
+shirt and combed side parting** then lock in "careful child" before any
+personality word appears. Nothing in the prompt says shy, nervous or clever; the
+wardrobe carries it, which keeps Flow from over-acting the expression.
+
+### Visual signature
+
+| Signature | When | What happens |
+|---|---|---|
+| **THE GLASSES PUSH** | Ravi works something out | He pushes his glasses up his nose with one finger, then points — his tell for having the answer |
+
+Pairs with Tara's lantern: she asks the viewer, he offers the *wrong-but-close*
+answer. That structure lets the show correct an error gently, without ever making
+the child at home feel they got it wrong.
+
+### IP safety check
+
+- [x] Glasses + checked shirt + cloth bag → no visual match to any known
+      preschool-show sidekick
+- [x] Human child, stylised CGI, explicit non-photoreal clause
+- [x] "Ravi" is an extremely common given name — not a protected mark
+
+---
+
+## 6. NANDU — the gentle giant
+
+**A young water buffalo. Enormous, slow, entirely benign.**
+
+Rural India runs on buffalo, and no preschool show has one. He is the obstacle
+that is not a threat: he blocks the lane simply by existing and having no
+intention of moving, which is a perfect preschool problem — nothing scary, no
+antagonist, just a situation requiring a plan.
+
+### Flow Characters tab — paste this exactly
+
+> Wide backswept crescent horns curving up and back from the head. Dark
+> slate-grey almost black hide with a sparse scatter of coarse hairs. Heavy
+> barrel body on short thick legs, broad flat muzzle, enormous dark eyes with
+> long lashes, ears held out sideways. A young water buffalo — big and heavy but
+> soft-faced and calm. Placid, sleepy, friendly expression. Moves slowly and
+> deliberately. Often has a smear of dried mud on the flank and a garland of
+> small flowers looped over one horn. 3D CGI animated style, DreamWorks and
+> Pixar theatrical animated film quality. Physical weight, hide texture,
+> personality-driven expressions. NOT photorealistic. NOT flat 2D. IMPORTANT:
+> crescent backswept horns and slate-grey hide — NOT a brown cow, NOT a bull,
+> NOT aggressive, NOT charging.
+
+### Why this order
+
+**Crescent horns first** distinguishes buffalo from cattle at a glance, and the
+closing negatives matter more than usual: "buffalo" pulls Flow toward American
+bison and toward charging-bull imagery, both wrong and the second actively
+unsafe for the age band. The flower garland is a small cultural truth that also
+signals "this animal is loved" without a line of dialogue.
+
+### IP safety check
+
+- [x] Water buffalo → no existing preschool-character match
+- [x] Explicitly non-aggressive, never charging
+- [x] Not a cow — deliberately chosen to avoid religious sensitivity around
+      depicting cattle comically
+
+---
+
+## 7. THE STAR LANTERN — the structural device
 
 Not a character. Deliberately does not speak, does not have a face, and is never
 animated as a creature — that is precisely what keeps it clear of the talking-map
@@ -281,6 +376,45 @@ and talking-backpack comparison.
 standard episode — one per stop of the journey. The two remaining dark points
 are the series' long game: they light only in special or seasonal episodes,
 which gives returning viewers something to notice and ask about.
+
+---
+
+## THE WORLD — where this happens
+
+A small town at the edge of fields. Not a city, not a village postcard — the
+ordinary in-between where most Indian children actually grow up. Everything is
+invented; per `FLOW_COMPLIANCE.md` §3, real place names never appear in a scene
+involving jeopardy.
+
+| Location | What it looks like | What it gives an episode |
+|---|---|---|
+| **The Blue Door House** | Tara's home. Single storey around an open courtyard, lime-washed walls, a bright indigo-blue wooden door, a tulsi pot in the middle of the courtyard, string cots against the wall | Start and end of every episode. The safe place |
+| **The Banyan Court** | An enormous banyan at the centre of town, aerial roots hanging like curtains, a circular stone platform built around the trunk, shade full of sleeping dogs | The hub. Where paths meet and characters gather |
+| **Neem Lane** | A narrow lane, compound walls on both sides, neem branches overhead, a hand pump, chalk rangoli patterns on the thresholds | Journeys pass through. Where Nandu blocks the way |
+| **The Stepwell** | A deep square well with stone steps descending on all four sides, cool green water at the bottom, pigeons in the wall niches | The "deep" location. Echoes, cold air, a little awe |
+| **The Mango Grove** | Rows of old mango trees, dappled light, fallen fruit, parrots overhead | Food, climbing, finding things |
+| **The Water Tank** | A wide shallow tank at the town edge, buffalo standing in it, lotus at one end, egrets stalking the shallows | Where Nandu lives. Big sky, reflections |
+| **The Rooftops** | Flat terraces connected by low walls, drying chillies and papads on mats, water tanks, kites caught on wires | The high route. Sunset scenes, seeing far |
+| **The Market Lane** | Awnings of mixed colours, pyramids of fruit and vegetables, brass vessels, sacks of grain — no brand names, no logos, no packaging | Counting, colours, choosing |
+
+### Recurring background life
+
+Parakeets, mynahs, a pair of peacocks on a wall at dawn, palm squirrels running
+the compound wall, sleeping street dogs, kites circling high, cows resting in
+shade, drying laundry, an autorickshaw somewhere out of frame. These go in
+prompts as atmosphere lines and are what will make the world read as *lived in*
+rather than as a set.
+
+### Light — the series' signature
+
+Three times of day, used deliberately:
+
+- **Early morning gold** — episode openings. Long shadows, cool air, mist over the tank
+- **High white midday** — the difficult middle. Hard shadows, heat shimmer, everything still
+- **Sunset amber** — the resolution. Warm rim light, dust in the air, kites in the sky
+
+Volumetric light through banyan roots, through neem leaves, down into the
+stepwell. This is the thing that will make the series look expensive.
 
 ---
 
@@ -335,11 +469,32 @@ and it is also simply what every successful preschool CGI show actually uses.
 ## FLOW SESSION CHECKLIST — Tara series
 
 1. Open the **Characters** tab first, every session, before any shot generation
-2. Create/select four characters: **Tara · Chikoo · Kaaki · Ammamma**
+2. Create/select the six characters: **Tara · Ravi · Chikoo · Kaaki · Nandu · Ammamma**
 3. Paste each description above **exactly**, including the trailing NOT clauses
-4. Save all four
+4. Save all six
 5. Paste the Style Bible at the top of the shot block
 6. Paste all shots in one block (two maximum) — never one at a time
+
+**Generate in this order.** Tara first, alone, until she is right — she is the
+hardest and everything else is judged against her. Then Ravi beside her to check
+they read as two distinct children at thumbnail size. Then the animals, then
+Ammamma. Do not generate a crowd shot until all six are locked.
+
+---
+
+## CAST AT A GLANCE
+
+| Character | What | Role | Speaks |
+|---|---|---|---|
+| **Tara** | Girl, 5 | Lead. Asks the viewer | Yes |
+| **Ravi** | Boy, 5 | Best friend. Cautious, close-but-wrong answers | Yes |
+| **Chikoo** | Palm squirrel | Companion. Comedy, gets scared first | No |
+| **Kaaki** | House crow | The taker. Stopped by three claps | Squawks |
+| **Nandu** | Water buffalo | The obstacle that is not a threat | No |
+| **Ammamma** | Grandmother | Quest-giver. Names the three stops | Yes |
+
+Three speaking parts, three non-speaking. Deliberate — it keeps the dialogue
+load low enough for the age band and gives the animals room to carry visual gags.
 
 ---
 
@@ -348,6 +503,6 @@ and it is also simply what every successful preschool CGI show actually uses.
 | Item | Status |
 |---|---|
 | Series name "Tara and the Star Lantern" | Working title — swap freely |
-| Character names Tara / Chikoo / Kaaki / Ammamma | Proposed — all easy for preschoolers to say |
-| Teaching language: Telugu or Hindi | **Needs your decision** — changes every episode script |
+| Character names | Proposed — all short and easy for preschoolers to say |
+| Second-language layer | **Deferred.** Series works in English; can be added later |
 | Episode length | Proposed 4–6 min; preschool retention favours the short end |
