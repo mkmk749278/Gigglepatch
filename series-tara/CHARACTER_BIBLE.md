@@ -433,6 +433,21 @@ Mirrors the discipline already working for Scout and Grimble.
 
 ---
 
+## THE HOUSE RENDER LOOK
+
+Every shot prompt aims for a **glossy premium 3D feature-film finish**: large
+expressive eyes with bright catchlights, soft subsurface warmth in the skin,
+gentle specular highlights on hair and fabric, rich saturated colour, crisp
+fabric detail. Bright, clean and high-value — never flat, never matte, never
+cheap-looking.
+
+Rendering style is not protectable and is free to aim at. Character *design* is
+not. Tara keeps her braids, her lantern and her teal kurta in every frame — no
+bob, no fringe, no backpack, no orange trousers, whatever reference gets waved
+around. See `FLOW_COMPLIANCE.md` §2 and §6.
+
+---
+
 ## SAFETY POSITION — read before writing any prompt
 
 These are **stylised 3D CGI animated characters**, not depictions of real

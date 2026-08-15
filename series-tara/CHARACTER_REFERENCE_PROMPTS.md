@@ -11,6 +11,29 @@ are not tool-specific.
 
 ---
 
+## THE RENDER LOOK WE ARE AIMING FOR
+
+Target a **glossy premium 3D feature-film finish** — the polished, high-value look
+of a modern animated poster, not a flat or matte render. Concretely:
+
+- Large expressive eyes with bright catchlights and visible iris detail
+- Soft subsurface warmth in the skin, gentle cheek blush
+- Slightly glossy specular highlights on hair, fabric and metal
+- Rich saturated colour, high contrast, bright and clean
+- Crisp fabric detail — visible weave, stitching, worn edges
+- Confident three-quarter body turn with the face toward camera
+
+This is style, not character. It is free to aim at. What is **not** free is any
+specific character's design — Tara keeps her braids, her star lantern and her
+teal kurta. No bob, no backpack, no orange trousers, ever. See
+`FLOW_COMPLIANCE.md` §2 and §6.
+
+**One exception to the gloss:** the reference images themselves stay flat-lit on
+a plain background, because their job is identification, not beauty. The glossy
+look belongs in the *shot* prompts. Keep the two separate.
+
+---
+
 ## IMAGE PROMPTS ARE NOT VIDEO PROMPTS
 
 A reference image has one job: show the character clearly so the model can lock
@@ -51,13 +74,17 @@ Warm brown skin, large dark-brown eyes, round full cheeks, gentle closed-mouth
 smile. A young child of five — small, short, round-faced, clearly a little kid,
 NOT a teenager, NOT an adult.
 
-3D CGI animated character, DreamWorks and Pixar theatrical animated film quality.
-Stylised cartoon proportions with a slightly large head. NOT photorealistic, NOT
-a real child, NOT live action, NOT flat 2D illustration, NOT anime.
+Premium 3D CGI animated feature-film character, DreamWorks and Pixar theatrical
+quality. Glossy polished render. Large expressive eyes with bright catchlights and
+visible iris detail. Soft subsurface warmth in the skin with gentle cheek blush.
+Crisp fabric detail with visible weave and worn edges. Stylised cartoon proportions
+with a slightly large head. NOT photorealistic, NOT a real child, NOT live action,
+NOT flat 2D illustration, NOT anime.
 
 IMPORTANT: hair is in two long braids with ribbons — NOT a short bob, NOT a
-fringe across the forehead. She carries a star lantern — NOT a backpack. Full
-body must be visible including both shoes.
+fringe across the forehead. She carries a star lantern — NOT a backpack. She wears
+a teal kurta and white churidar — NOT orange trousers, NOT a pink top. Full body
+must be visible including both shoes.
 ```
 
 ### Accept / reject checklist

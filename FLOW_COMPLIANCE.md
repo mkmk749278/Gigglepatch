@@ -195,6 +195,22 @@ Run this check whenever adding a new character or before anyone asks "is Scout o
 **Ammamma** (Tara's grandmother): original design; replaces the talking-map
 device with a human quest-giver — different expression of the same structure.
 
+### Reference images from other shows
+
+Someone will eventually paste a frame or poster from an existing series as a
+"make it look like this" reference. Split it in two before acting:
+
+| Free to copy | Never copy |
+|---|---|
+| Render quality — gloss, lighting, eye highlights, skin warmth | Any character's face, hair, clothing or silhouette |
+| Colour richness and contrast | A show's logo, title treatment or name |
+| Composition and posing conventions | A recognisable companion character |
+| Overall production polish | Signature props (a specific backpack, a talking map) |
+
+**Never upload a frame containing another show's character into a Flow character
+reference slot.** Describe the *look* in words instead. If a generated result
+resembles a known character, discard it.
+
 ### Format vs. expression
 
 Story formats and structures are not copyrightable — only specific expression
