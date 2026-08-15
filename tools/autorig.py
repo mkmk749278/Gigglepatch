@@ -24,22 +24,92 @@ import json
 import os
 import sys
 
+import cv2
 import numpy as np
 from PIL import Image, ImageDraw, ImageFilter
 
 
-def load_rgba(path, bg_tolerance=26):
-    """Load an image, removing a flat background if it is not already cut out."""
+def chroma_key(arr, thresh=60):
+    """Magenta-key mask: True where the pixel is background.
+
+    Flat-colour distance keying is not enough in practice. Generated backgrounds
+    come back as a *gradient* — measured 205 to 241 across one frame — which
+    blows past any tolerance tight enough to keep the character's dark hair.
+
+    Magenta is red and blue high with green low, and no part of this cast is
+    magenta, so `min(R, B) - G` separates them with enormous margin: background
+    sits near 150, while teal, skin, gold, red shoes, black hair and white
+    leggings all land at or below zero. The measure is a ratio between channels,
+    so a brightness gradient moves it barely at all — and the soft drop shadow
+    under the feet is still magenta, so it keys out with everything else.
+    """
+    r, g, b = arr[..., 0], arr[..., 1], arr[..., 2]
+    return (np.minimum(r, b) - g) > thresh
+
+
+def largest_blob(mask):
+    """Keep only the biggest connected region — drops watermarks and specks."""
+    m = mask.astype(np.uint8)
+    n, lab, stats, _ = cv2.connectedComponentsWithStats(m, 8)
+    if n <= 2:
+        return mask
+    keep = 1 + int(np.argmax(stats[1:, cv2.CC_STAT_AREA]))
+    return lab == keep
+
+
+def despill(arr, alpha, thresh=60):
+    """Pull magenta fringe out of the edge pixels the key left behind."""
+    out = arr.copy()
+    edge = (alpha > 0) & (alpha < 255)
+    if not edge.any():
+        edge = alpha > 0
+    r, g, b = [out[..., i].astype(np.int16) for i in range(3)]
+    spill = np.minimum(r, b) - g
+    hit = edge & (spill > 0)
+    cap = g + np.maximum(spill - thresh, 0)
+    for i, ch in ((0, r), (2, b)):
+        out[..., i] = np.where(hit, np.minimum(ch, np.maximum(cap, 0)), ch).clip(0, 255)
+    return out
+
+
+def load_rgba(path, bg_tolerance=26, key=None, keep_largest=True):
+    """Load an image, removing the background if it is not already cut out.
+
+    `key` forces a route: 'chroma' for a magenta screen, 'flat' for a solid
+    colour. Left as None it picks chroma whenever the corners actually are
+    magenta, which is what our own prompts ask the model for.
+
+    `keep_largest` discards everything but the biggest connected region, which
+    removes the model's corner watermark from a single-character image. Turn it
+    off for a strip of separate objects — mouth shapes, lantern stages — or it
+    will keep exactly one of them.
+    """
     im = Image.open(path).convert('RGBA')
     a = np.asarray(im)[..., 3]
     if a.min() < 250:                      # already has transparency
         return im
     arr = np.asarray(im).astype(np.int16)
+
     corners = np.stack([arr[0, 0, :3], arr[0, -1, :3], arr[-1, 0, :3], arr[-1, -1, :3]])
-    bg = np.median(corners, axis=0)
-    dist = np.abs(arr[..., :3] - bg).sum(axis=-1)
-    alpha = np.where(dist < bg_tolerance * 3, 0, 255).astype(np.uint8)
-    out = arr.copy()
+    is_magenta = np.median(np.minimum(corners[:, 0], corners[:, 2]) - corners[:, 1]) > 60
+
+    if key == 'chroma' or (key is None and is_magenta):
+        fg = ~chroma_key(arr)
+        if keep_largest:
+            fg = largest_blob(fg)
+        alpha = np.where(fg, 255, 0).astype(np.uint8)
+        # one-pixel erode-then-feather: the key leaves a rim of blended
+        # background on every edge, and it is magenta
+        alpha = cv2.erode(alpha, np.ones((3, 3), np.uint8), iterations=1)
+        alpha = cv2.GaussianBlur(alpha, (3, 3), 0)
+        out = despill(arr.astype(np.uint8), alpha)
+    else:
+        bg = np.median(corners, axis=0)
+        dist = np.abs(arr[..., :3] - bg).sum(axis=-1)
+        alpha = np.where(dist < bg_tolerance * 3, 0, 255).astype(np.uint8)
+        out = arr.astype(np.uint8)
+
+    out = out.copy()
     out[..., 3] = alpha
     return Image.fromarray(out.astype(np.uint8))
 

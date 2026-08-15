@@ -26,6 +26,13 @@ describing her from scratch each time:
 Steps 2 to 4 are *edits of step 1*, not new generations. That is the whole point
 of using this model.
 
+**Want it in one paste instead?** `MODEL_SHEET_PROMPTS.md` has a single
+all-in-one prompt per character that produces the whole sheet — hero, A-pose,
+turnaround, head views, expressions, mouths and props — in one generation, for
+all six of the cast. It is faster and the panels are guaranteed to match each
+other because they came out of the same pass. Come back here when a sheet returns
+inconsistent and you need per-panel control.
+
 ---
 
 ## STEP 1 — THE HERO IMAGE

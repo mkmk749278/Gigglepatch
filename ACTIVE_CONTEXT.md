@@ -65,7 +65,13 @@ Scout is paused, not cancelled. "The Lost Map" is fully written and unstarted in
 | Puppet: CALL-OUT PAUSE (10s) | ✅ Renders offline, ~70s at 1080p |
 | Puppet: walk cycle + scrolling bg (10s) | ✅ Renders clean |
 | Puppet part-set prompts | ✅ `series-tara/PART_SET_PROMPTS.md` |
-| Puppet part art generated | ⬜ **NEXT — `series-tara/NANO_BANANA_PROMPTS.md`** |
+| One-prompt model sheets, all six cast | ✅ `series-tara/MODEL_SHEET_PROMPTS.md` |
+| **Tara art generated — 19 images** | ✅ `series-tara/reference/nano_banana_v1/` |
+| Mouth shapes cut to parts | ✅ 6 PNGs in `reference/parts/` |
+| Lantern stages cut to parts | ✅ 4 PNGs in `reference/parts/` |
+| Magenta chroma key + despill | ✅ `autorig.load_rgba`, tested on the real art |
+| **Full-resolution A-pose** | ⬜ **NEXT — regenerate, see MODEL_SHEET_PROMPTS §"first run"** |
+| Tara body parts cut from A-pose | ⬜ Blocked on the A-pose above |
 | Auto-rig from one A-pose image | ✅ `tools/autorig.py`, tested |
 | Location art (4 stages) | ✅ `tools/scenes.py` — courtyard, neem lane, mango grove, banyan court |
 | Camera (pan / push-in) | ✅ `puppet.Camera` — crops a window from a 2560x1440 stage |
@@ -109,7 +115,12 @@ jaggery (clap three times). Ends by leaving a sweet on the wall for Kaaki.
 
 ### Puppet route (parallel option — no credits, no drift)
 
-- [ ] Generate Tara's hero image in Nano Banana, then the A-pose from it
+- [x] Generate Tara's model sheet from the single prompt in `MODEL_SHEET_PROMPTS.md`
+- [ ] **Regenerate the A-pose full-frame** — braids behind the shoulders, empty
+      hands, legs apart. The sheet's own panel is too small to cut from
+- [ ] Regenerate two rejected expressions — curious came back in an orange top,
+      surprised came back in a different render style
+- [ ] Generate the other five sheets: Ravi, Chikoo, Kaaki, Nandu, Ammamma
 - [ ] Run `tools/autorig.py` on the A-pose, check `annotate()` output before trusting the cut
 - [ ] Wire the PNGs into `tools/tara_rig.py`, replacing the `_draw_*` functions
 - [ ] Check pivots with an all-zero-rotation frame before animating
@@ -155,6 +166,10 @@ _(Add anything that's stuck, half-done, or needs a decision here)_
 | 2026-08-15 | Puppet walk cycle added with a scrolling background — the cut-out technique for journeys; lantern resized after it dragged on the ground |
 | 2026-08-15 | `series-tara/PART_SET_PROMPTS.md` — prompts for the real puppet artwork, flat-lit and pivot-aware |
 | 2026-08-15 | Full no-Flow chain: four location stages, a camera, a second character rig, and multi-shot assembly in `tools/episode.py` |
+| 2026-08-15 | One-prompt model sheets for all six cast — `series-tara/MODEL_SHEET_PROMPTS.md` |
+| 2026-08-15 | Tara's first art generated: 19 images, character consistent across all of them; saved to `series-tara/reference/nano_banana_v1/` |
+| 2026-08-15 | `autorig.load_rgba` rewritten to chroma-key magenta — the background came back as a gradient, which flat-colour keying cannot handle |
+| 2026-08-15 | `tools/cut_strip.py` — six mouth shapes and four lantern stages cut to transparent PNGs from the real art |
 
 ---
 
