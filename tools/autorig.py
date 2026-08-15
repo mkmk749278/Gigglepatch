@@ -200,6 +200,25 @@ def analyse(im):
             hip_y = y
             break
 
+    # Refine the torso columns now that the hip is known. The first pass takes a
+    # median over every arms-clear row, which lands between the waist and the
+    # hem and so reads narrower than the garment — measured 138px against a
+    # 185px kurta, which would leave a strip of tunic attached to each arm. The
+    # band just above the hip is where the tunic is widest and the arms are
+    # furthest away, so measure there and take the widest reading.
+    # A-pose arms end well above the hip, so this band usually holds a single
+    # run — and that run is the whole garment. Requiring three runs here finds
+    # nothing; requiring one is what actually measures the tunic.
+    lo = max(hip_y - int(span * 0.14), shoulder_y + int(span * 0.06))
+    hi = max(hip_y - int(span * 0.02), lo + 1)
+    wide = []
+    for y in range(lo, min(hi, bottom)):
+        inner = [r for r in rows[y] if r[0] - 6 <= cx <= r[1] + 6]
+        if inner and (len(rows[y]) == 1 or len(rows[y]) >= 3):
+            wide.append(max(inner, key=lambda r: r[1] - r[0]))
+    if wide:
+        torso_x = (min(r[0] for r in wide), max(r[1] for r in wide))
+
     return dict(top=top, bottom=bottom, neck_y=neck_y, shoulder_y=shoulder_y,
                 hip_y=hip_y, torso_x=tuple(torso_x), rows=rows, w=w, h=h, cx=cx)
 
@@ -240,12 +259,25 @@ def split_parts(path, out_dir):
     save('torso', (tx0, m['neck_y'] - h_total * 0.01, tx1, m['hip_y'] + h_total * 0.02),
          (0.5, 0.06))
 
-    # arms: everything outside the torso columns, between shoulder and hips
-    for side, box in (('arm_l', (0, m['shoulder_y'] - h_total * 0.03, tx0 + 4,
+    # Arms: everything outside the torso columns, between shoulder and hips.
+    # The box overlaps the torso by a few pixels so the shoulder does not open a
+    # gap when the arm rotates — but that overlap is a strip of tunic running
+    # the full height of the crop, and it would swing with the arm as a teal
+    # shard. Keep it at the shoulder, erase it below.
+    overlap = 4
+    keep_to = m['shoulder_y'] + h_total * 0.16
+    for side, box in (('arm_l', (0, m['shoulder_y'] - h_total * 0.03, tx0 + overlap,
                                  m['hip_y'] + h_total * 0.08)),
-                      ('arm_r', (tx1 - 4, m['shoulder_y'] - h_total * 0.03, m['w'],
-                                 m['hip_y'] + h_total * 0.08))):
+                      ('arm_r', (tx1 - overlap, m['shoulder_y'] - h_total * 0.03,
+                                 m['w'], m['hip_y'] + h_total * 0.08))):
         save(side, box, (0.85 if side == 'arm_l' else 0.15, 0.08))
+        f = os.path.join(out_dir, f'{side}.png')
+        p = Image.open(f)
+        a = np.asarray(p).copy()
+        cut_row = int(keep_to - box[1])
+        strip = slice(-overlap, None) if side == 'arm_l' else slice(0, overlap)
+        a[max(cut_row, 0):, strip, 3] = 0
+        Image.fromarray(a).save(f)
 
     # legs: split the lower half down the centre of the torso
     mid_x = (tx0 + tx1) / 2

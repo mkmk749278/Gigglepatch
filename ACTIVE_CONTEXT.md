@@ -70,8 +70,12 @@ Scout is paused, not cancelled. "The Lost Map" is fully written and unstarted in
 | Mouth shapes cut to parts | ✅ 6 PNGs in `reference/parts/` |
 | Lantern stages cut to parts | ✅ 4 PNGs in `reference/parts/` |
 | Magenta chroma key + despill | ✅ `autorig.load_rgba`, tested on the real art |
-| **Full-resolution A-pose** | ⬜ **NEXT — regenerate, see MODEL_SHEET_PROMPTS §"first run"** |
-| Tara body parts cut from A-pose | ⬜ Blocked on the A-pose above |
+| **Full-resolution A-pose** | ✅ `reference/nano_banana_v1/tara_apose.jpeg` |
+| Tara body parts cut from A-pose | ✅ 6 parts in `reference/parts/body/` |
+| Photo rig — real art in the puppet | ✅ `tools/tara_photo_rig.py`, assembly clean |
+| CALL-OUT PAUSE with real art | ✅ Renders 240 frames in ~60s at 1080p |
+| Elbow + knee joints | ⬜ Arm swings as one piece; no elbow bend yet |
+| Background art quality | ⬜ **Now the weakest link — coded scenes vs. generated character** |
 | Auto-rig from one A-pose image | ✅ `tools/autorig.py`, tested |
 | Location art (4 stages) | ✅ `tools/scenes.py` — courtyard, neem lane, mango grove, banyan court |
 | Camera (pan / push-in) | ✅ `puppet.Camera` — crops a window from a 2560x1440 stage |
@@ -116,14 +120,18 @@ jaggery (clap three times). Ends by leaving a sweet on the wall for Kaaki.
 ### Puppet route (parallel option — no credits, no drift)
 
 - [x] Generate Tara's model sheet from the single prompt in `MODEL_SHEET_PROMPTS.md`
-- [ ] **Regenerate the A-pose full-frame** — braids behind the shoulders, empty
-      hands, legs apart. The sheet's own panel is too small to cut from
+- [x] **Regenerate the A-pose full-frame** — braids behind the shoulders, empty
+      hands, legs apart
 - [ ] Regenerate two rejected expressions — curious came back in an orange top,
       surprised came back in a different render style
 - [ ] Generate the other five sheets: Ravi, Chikoo, Kaaki, Nandu, Ammamma
-- [ ] Run `tools/autorig.py` on the A-pose, check `annotate()` output before trusting the cut
-- [ ] Wire the PNGs into `tools/tara_rig.py`, replacing the `_draw_*` functions
-- [ ] Check pivots with an all-zero-rotation frame before animating
+- [x] Run `tools/autorig.py` on the A-pose and check `annotate()` output
+- [x] Wire the PNGs into a rig — `tools/tara_photo_rig.py`
+- [x] Check pivots with an all-zero-rotation frame — clean, no seams
+- [ ] Split the arm at the elbow and the leg at the knee so the lantern can
+      lift to chest height instead of swinging out sideways
+- [ ] Generate background art to match the character — the coded scenes are now
+      visibly the weakest part of the frame
 - [ ] Decide the split: puppet for character performance, Flow for establishing shots
 
 ### Paused (Scout line — do not delete)
@@ -170,6 +178,9 @@ _(Add anything that's stuck, half-done, or needs a decision here)_
 | 2026-08-15 | Tara's first art generated: 19 images, character consistent across all of them; saved to `series-tara/reference/nano_banana_v1/` |
 | 2026-08-15 | `autorig.load_rgba` rewritten to chroma-key magenta — the background came back as a gradient, which flat-colour keying cannot handle |
 | 2026-08-15 | `tools/cut_strip.py` — six mouth shapes and four lantern stages cut to transparent PNGs from the real art |
+| 2026-08-15 | Tara's A-pose regenerated correctly and cut into 6 rig parts; `tools/tara_photo_rig.py` builds her from the real artwork and the zero-rotation assembly is seamless |
+| 2026-08-15 | CALL-OUT PAUSE re-rendered with the generated art, animation unchanged — the rig's art/performance split held |
+| 2026-08-15 | autorig: arm crops no longer carry a full-height strip of tunic from the torso overlap |
 
 ---
 
