@@ -77,8 +77,9 @@ Scout is paused, not cancelled. "The Lost Map" is fully written and unstarted in
 | Photo rig — real art in the puppet | ✅ `tools/tara_photo_rig.py`, assembly clean |
 | CALL-OUT PAUSE with real art | ✅ Renders 240 frames in ~60s at 1080p |
 | Wave hello (5s) with real art | ✅ `tara_photo_rig.py wave` — courtyard, morning |
-| Elbow + knee joints | ⬜ Arm swings as one piece; no elbow bend yet |
-| Background art quality | ⬜ **Now the weakest link — coded scenes vs. generated character** |
+| Elbow + knee joints | ✅ Limbs split across their own axis — 11-part rig |
+| Composite finish pass | ✅ `tools/finish.py` — contact shadow, depth of field, shared grade, grain |
+| Background art quality | ⬜ Integrated by the finish pass; the art itself is still coded |
 | Auto-rig from one A-pose image | ✅ `tools/autorig.py`, tested |
 | Location art (4 stages) | ✅ `tools/scenes.py` — courtyard, neem lane, mango grove, banyan court |
 | Camera (pan / push-in) | ✅ `puppet.Camera` — crops a window from a 2560x1440 stage |
@@ -131,8 +132,7 @@ jaggery (clap three times). Ends by leaving a sweet on the wall for Kaaki.
 - [x] Run `tools/autorig.py` on the A-pose and check `annotate()` output
 - [x] Wire the PNGs into a rig — `tools/tara_photo_rig.py`
 - [x] Check pivots with an all-zero-rotation frame — clean, no seams
-- [ ] Split the arm at the elbow and the leg at the knee so the lantern can
-      lift to chest height instead of swinging out sideways
+- [x] Split the arm at the elbow and the leg at the knee
 - [ ] Generate background art to match the character — the coded scenes are now
       visibly the weakest part of the frame
 - [ ] Decide the split: puppet for character performance, Flow for establishing shots
@@ -186,6 +186,8 @@ _(Add anything that's stuck, half-done, or needs a decision here)_
 | 2026-08-15 | autorig: arm crops no longer carry a full-height strip of tunic from the torso overlap |
 | 2026-08-15 | `HANDOFF.md` written — project state, both production routes, hard-won lessons, open decisions |
 | 2026-08-15 | `wave_hello()` — 5s greeting with anticipation and a decaying wave; gesturing arm moved in front of the torso so the shoulder joint stops opening |
+| 2026-08-15 | Elbows and knees: limbs split across their own axis, both halves kept on the original canvas so the joint needs no bookkeeping. Wave now comes from the elbow |
+| 2026-08-15 | `tools/finish.py` — contact shadow, background defocus, one shared grade and a common grain floor, so the character stops reading as pasted on. Shots now render at 30fps |
 
 ---
 

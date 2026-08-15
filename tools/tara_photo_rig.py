@@ -55,6 +55,45 @@ def _far_point(im, origin, ignore_side=None, margin=10):
     return (int(xs[i]), int(ys[i]))
 
 
+def _split_limb(im, root, tip, frac=0.5, overlap=7, feather=1.6):
+    """Cut a limb into two pieces at a joint, across the limb's own axis.
+
+    A horizontal cut is wrong for anything drawn at an angle — an A-pose arm
+    runs diagonally, so a horizontal line slices it lengthwise. This projects
+    every pixel onto the root-to-tip axis and cuts across it, which works at
+    any angle the limb happens to have been drawn at.
+
+    Both halves are returned on the *original canvas*, uncropped. That is what
+    makes the rebuild exact: the joint has the same coordinates in both pieces,
+    so it serves as the child's pivot and its attach point in the parent
+    without any bookkeeping, and a zero-rotation pose reproduces the source.
+
+    The pieces overlap by a few pixels either side of the cut so the joint does
+    not open a gap when it bends.
+    """
+    ax, ay = tip[0] - root[0], tip[1] - root[1]
+    length = float(np.hypot(ax, ay)) or 1.0
+    ux, uy = ax / length, ay / length
+    cut = frac * length
+
+    h, w = im.height, im.width
+    xs = np.arange(w)[None, :] - root[0]
+    ys = np.arange(h)[:, None] - root[1]
+    proj = xs * ux + ys * uy                       # distance along the limb
+
+    a = np.asarray(im)[..., 3].astype(np.float32)
+    upper = np.asarray(im).copy()
+    lower = np.asarray(im).copy()
+    # smooth ramps rather than hard edges, so the seam does not alias
+    up_k = np.clip((cut + overlap - proj) / feather, 0, 1)
+    lo_k = np.clip((proj - (cut - overlap)) / feather, 0, 1)
+    upper[..., 3] = (a * up_k).astype(np.uint8)
+    lower[..., 3] = (a * lo_k).astype(np.uint8)
+
+    joint = (root[0] + ux * cut, root[1] + uy * cut)
+    return (Image.fromarray(upper), Image.fromarray(lower), joint)
+
+
 def build_rig(parts_dir=PARTS_DIR, props_dir=PROPS_DIR, lit_points=0,
               height=None):
     """Assemble the photo rig. Returns a Rig whose zero pose is the source image."""
@@ -104,24 +143,40 @@ def build_rig(parts_dir=PARTS_DIR, props_dir=PROPS_DIR, lit_points=0,
     # torso is the root; everything else hangs off it
     rig.add(Part('torso', images['torso'], local('torso'), z=40))
 
-    rig.add(Part('leg_l', images['leg_l'], local('leg_l'), 'torso',
-                 attach('leg_l', 'torso'), z=20))
-    rig.add(Part('leg_r', images['leg_r'], local('leg_r'), 'torso',
-                 attach('leg_r', 'torso'), z=21))
+    # Legs split at the knee. The thigh keeps the name `leg_*` so every
+    # animation already written against it drives the hip exactly as before,
+    # and the shin is new.
+    for side, z in (('l', 20), ('r', 21)):
+        nm = f'leg_{side}'
+        hip = local(nm)
+        foot = _far_point(images[nm], hip)
+        thigh, shin, knee = _split_limb(images[nm], hip, foot, frac=0.48)
+        rig.add(Part(nm, thigh, hip, 'torso', attach(nm, 'torso'), z=z))
+        rig.add(Part(f'shin_{side}', shin, knee, nm, knee, z=z))
 
+    # Arms split at the elbow. Elbow bend is what does the readability work: a
+    # straight arm reads as pointing, a bent one as waving or holding.
+    #
     # Her left arm is the gesturing arm and draws in front of the torso, behind
     # the head. Behind the torso it would open a visible gap at the shoulder as
     # soon as it swung up — in front, the arm covers its own joint.
-    rig.add(Part('arm_l', images['arm_l'], local('arm_l'), 'torso',
-                 attach('arm_l', 'torso'), z=45))
-    rig.add(Part('arm_r', images['arm_r'], local('arm_r'), 'torso',
-                 attach('arm_r', 'torso'), z=60))
+    hands = {}
+    for side, z in (('l', 45), ('r', 60)):
+        nm = f'arm_{side}'
+        shoulder = local(nm)
+        # each arm crop overlaps the torso on the side it was cut from
+        ignore = 'right' if side == 'l' else 'left'
+        hand = _far_point(images[nm], shoulder, ignore_side=ignore)
+        upper, fore, elbow = _split_limb(images[nm], shoulder, hand, frac=0.46)
+        rig.add(Part(nm, upper, shoulder, 'torso', attach(nm, 'torso'), z=z))
+        rig.add(Part(f'fore_{side}', fore, elbow, nm, elbow, z=z + 1))
+        hands[side] = hand
 
     rig.add(Part('head', images['head'], local('head'), 'torso',
                  attach('head', 'torso'), z=50))
 
-    # the lantern hangs from whichever point of the near arm is furthest from
-    # the shoulder — which is the hand, whatever angle the arm was drawn at
+    # the lantern hangs from the hand — now a child of the forearm, so it
+    # follows the elbow as well as the shoulder
     lan = os.path.join(props_dir, f'lantern_{max(0, min(3, lit_points))}.png')
     if os.path.exists(lan):
         lim = Image.open(lan).convert('RGBA')
@@ -129,10 +184,8 @@ def build_rig(parts_dir=PARTS_DIR, props_dir=PROPS_DIR, lit_points=0,
         if lim.height > target:
             k = target / lim.height
             lim = lim.resize((max(int(lim.width * k), 1), target), Image.LANCZOS)
-        # arm_r's crop overlaps the torso on its left edge, so ignore it there
-        hand = _far_point(images['arm_r'], local('arm_r'), ignore_side='left')
         rig.add(Part('lantern', lim, (lim.width // 2, int(lim.height * 0.06)),
-                     'arm_r', hand, z=70))
+                     'fore_r', hands['r'], z=70))
 
     return rig
 
@@ -152,7 +205,7 @@ def assembly_check(out='assembly_check.png', size=(1920, 1080), bg=(24, 24, 28))
     return out
 
 
-def call_out_shot(out='tara_callout.mp4', seconds=10.0, fps=24,
+def call_out_shot(out="tara_callout.mp4", seconds=10.0, fps=30,
                   size=(1920, 1080)):
     """The CALL-OUT PAUSE, rendered with the real artwork on a real background.
 
@@ -168,6 +221,7 @@ def call_out_shot(out='tara_callout.mp4', seconds=10.0, fps=24,
     animation gains the bend with no edit here.
     """
     import scenes
+    import finish
     from puppet import render_video
     from tara_rig import call_out_pause
 
@@ -176,17 +230,26 @@ def call_out_shot(out='tara_callout.mp4', seconds=10.0, fps=24,
     ground = int(size[1] * 0.90)
     rig.root_pos = (int(size[0] * 0.50), ground - rig.foot_drop)
 
-    stage = scenes.banyan_court(scenes.MORNING, size=size)
+    stage = finish.soften(scenes.banyan_court(scenes.MORNING, size=size))
+    finish.contact_shadow(stage, rig.root_pos[0], ground - h * 0.012, h * 0.17)
+
     anim = call_out_pause()
     anim.track('torso', 'scale', [(0, rig.scale), (seconds, rig.scale)])
 
-    render_video(rig, anim, out, seconds, fps=fps, size=size, background=stage)
+    render_video(rig, anim, out, seconds, fps=fps, size=size,
+                 background=stage, extra=finish.Grade(size))
     return out
 
 
-def wave_shot(out='tara_wave.mp4', seconds=5.0, fps=24, size=(1920, 1080)):
-    """Tara waving hello, with the real artwork on a location background."""
+def wave_shot(out='tara_wave.mp4', seconds=5.0, fps=30, size=(1920, 1080)):
+    """Tara waving hello, finished so she sits *in* the shot rather than on it.
+
+    30fps rather than 24. Cut-out animation has no motion blur, so the judder
+    that film gets away with is much more visible here — the extra six frames a
+    second cost nothing and are the cheapest smoothness available.
+    """
     import scenes
+    import finish
     from puppet import render_video
     from tara_rig import wave_hello
 
@@ -195,11 +258,15 @@ def wave_shot(out='tara_wave.mp4', seconds=5.0, fps=24, size=(1920, 1080)):
     ground = int(size[1] * 0.93)
     rig.root_pos = (int(size[0] * 0.50), ground - rig.foot_drop)
 
-    stage = scenes.courtyard(scenes.MORNING, size=size)
+    stage = finish.soften(scenes.courtyard(scenes.MORNING, size=size))
+    finish.contact_shadow(stage, rig.root_pos[0], ground - h * 0.012, h * 0.17)
+
     anim = wave_hello(seconds)
     anim.track('torso', 'scale', [(0, rig.scale), (seconds, rig.scale)])
 
-    render_video(rig, anim, out, seconds, fps=fps, size=size, background=stage)
+    grade = finish.Grade(size)
+    render_video(rig, anim, out, seconds, fps=fps, size=size,
+                 background=stage, extra=grade)
     return out
 
 

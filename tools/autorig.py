@@ -223,8 +223,15 @@ def analyse(im):
                 hip_y=hip_y, torso_x=tuple(torso_x), rows=rows, w=w, h=h, cx=cx)
 
 
-def cut(im, box, feather=3):
-    """Extract a region with a soft edge so joints do not show a hard seam."""
+def cut(im, box, feather=0):
+    """Extract a region of the source image.
+
+    Feathering defaults off. It was meant to stop joints showing a hard seam,
+    but it softens the *crop boundary* too — and where two parts butt together,
+    torso against arm, two semi-transparent edges meet and the background shows
+    through as a light line down the join. The chroma key already leaves a soft
+    edge on the true silhouette, which is the only place softness is wanted.
+    """
     x0, y0, x1, y1 = [int(v) for v in box]
     part = im.crop((x0, y0, x1, y1))
     if feather:
