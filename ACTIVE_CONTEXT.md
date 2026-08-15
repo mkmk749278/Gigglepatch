@@ -76,6 +76,7 @@ Scout is paused, not cancelled. "The Lost Map" is fully written and unstarted in
 | Tara body parts cut from A-pose | ✅ 6 parts in `reference/parts/body/` |
 | Photo rig — real art in the puppet | ✅ `tools/tara_photo_rig.py`, assembly clean |
 | CALL-OUT PAUSE with real art | ✅ Renders 240 frames in ~60s at 1080p |
+| Wave hello (5s) with real art | ✅ `tara_photo_rig.py wave` — courtyard, morning |
 | Elbow + knee joints | ⬜ Arm swings as one piece; no elbow bend yet |
 | Background art quality | ⬜ **Now the weakest link — coded scenes vs. generated character** |
 | Auto-rig from one A-pose image | ✅ `tools/autorig.py`, tested |
@@ -184,6 +185,7 @@ _(Add anything that's stuck, half-done, or needs a decision here)_
 | 2026-08-15 | CALL-OUT PAUSE re-rendered with the generated art, animation unchanged — the rig's art/performance split held |
 | 2026-08-15 | autorig: arm crops no longer carry a full-height strip of tunic from the torso overlap |
 | 2026-08-15 | `HANDOFF.md` written — project state, both production routes, hard-won lessons, open decisions |
+| 2026-08-15 | `wave_hello()` — 5s greeting with anticipation and a decaying wave; gesturing arm moved in front of the torso so the shoulder joint stops opening |
 
 ---
 

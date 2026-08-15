@@ -357,6 +357,53 @@ def call_out_pause():
     return a
 
 
+def wave_hello(seconds=5.0):
+    """Five seconds of Tara greeting the viewer — the shot that opens an episode.
+
+    A wave is mostly timing. The arm dips slightly *before* it rises, because
+    anticipation is what stops a movement looking like a teleport, and the waves
+    themselves are uneven — 14 degrees, then 12, then 9 — so the gesture decays
+    instead of ticking like a metronome.
+
+    The whole body joins in. A wave driven only from the shoulder reads as a
+    detached limb: the torso leans very slightly toward the raised arm, the head
+    tilts into it, and the free-side leg takes the weight shift.
+    """
+    a = Animation()
+
+    # breathing under everything, so no held moment goes fully still
+    a.track('torso', 'dy', [(0, 0), (0.9, -6), (2.0, 0), (3.1, -6), (4.2, 0), (5.0, -3)])
+    a.track('torso', 'rot', [(0, 0), (0.8, -1.6), (2.4, -2.2), (3.8, -1.4), (5.0, 0)])
+
+    # head turns into the greeting and holds, then relaxes
+    a.track('head', 'rot', [(0, 0), (0.5, 3), (1.2, -7), (3.4, -6), (4.3, -2), (5.0, -1)])
+
+    # The wave. Dip at 0.45 is the anticipation; the peak overshoots and settles.
+    # The arm rests pointing down-and-out, so +90 puts it up-and-out at roughly
+    # 45 degrees — hand clear of the head, which is where a wave has to live.
+    # Past about 100 it swings over the crown and the hand vanishes behind the
+    # hair, taking the readable part of the gesture with it.
+    a.track('arm_l', 'rot', [(0, 8), (0.45, -4), (1.05, 92), (1.30, 80),
+                             (1.65, 96), (2.00, 79), (2.35, 94), (2.70, 82),
+                             (3.05, 91), (3.40, 85),
+                             (4.10, 14), (5.0, 8)], easing=ease_out_back)
+    a.track('fore_l', 'rot', [(0, 4), (0.45, 0), (1.05, 40), (1.30, 16),
+                              (1.65, 44), (2.00, 18), (2.35, 40), (2.70, 20),
+                              (3.05, 36), (3.40, 22),
+                              (4.10, 8), (5.0, 4)], easing=ease_out_back)
+
+    # the lantern arm stays down and barely moves — she is holding something
+    a.track('arm_r', 'rot', [(0, -6), (1.2, -10), (3.4, -9), (5.0, -6)])
+    a.track('fore_r', 'rot', [(0, 5), (1.2, 2), (3.4, 3), (5.0, 5)])
+    # the ring handle keeps the lantern upright while the arm moves under it
+    a.track('lantern', 'rot', [(0, 1), (1.2, 5), (3.4, 4), (5.0, 1)])
+
+    # weight shifts onto the standing leg as the other side lifts
+    a.track('leg_l', 'rot', [(0, 1.2), (1.2, -2.0), (3.4, -1.6), (5.0, 0.6)])
+    a.track('leg_r', 'rot', [(0, -1.2), (1.2, 2.0), (3.4, 1.6), (5.0, -0.6)])
+    return a
+
+
 def walk_cycle(seconds=10.0, step=0.52):
     """A looping walk. The feet cycle in place and the world slides past.
 

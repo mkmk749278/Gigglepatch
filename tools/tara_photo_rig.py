@@ -109,9 +109,11 @@ def build_rig(parts_dir=PARTS_DIR, props_dir=PROPS_DIR, lit_points=0,
     rig.add(Part('leg_r', images['leg_r'], local('leg_r'), 'torso',
                  attach('leg_r', 'torso'), z=21))
 
-    # her left arm reads as the far arm, so it sits behind the body
+    # Her left arm is the gesturing arm and draws in front of the torso, behind
+    # the head. Behind the torso it would open a visible gap at the shoulder as
+    # soon as it swung up — in front, the arm covers its own joint.
     rig.add(Part('arm_l', images['arm_l'], local('arm_l'), 'torso',
-                 attach('arm_l', 'torso'), z=10))
+                 attach('arm_l', 'torso'), z=45))
     rig.add(Part('arm_r', images['arm_r'], local('arm_r'), 'torso',
                  attach('arm_r', 'torso'), z=60))
 
@@ -182,10 +184,31 @@ def call_out_shot(out='tara_callout.mp4', seconds=10.0, fps=24,
     return out
 
 
+def wave_shot(out='tara_wave.mp4', seconds=5.0, fps=24, size=(1920, 1080)):
+    """Tara waving hello, with the real artwork on a location background."""
+    import scenes
+    from puppet import render_video
+    from tara_rig import wave_hello
+
+    h = int(size[1] * 0.66)
+    rig = build_rig(height=h)
+    ground = int(size[1] * 0.93)
+    rig.root_pos = (int(size[0] * 0.50), ground - rig.foot_drop)
+
+    stage = scenes.courtyard(scenes.MORNING, size=size)
+    anim = wave_hello(seconds)
+    anim.track('torso', 'scale', [(0, rig.scale), (seconds, rig.scale)])
+
+    render_video(rig, anim, out, seconds, fps=fps, size=size, background=stage)
+    return out
+
+
 if __name__ == '__main__':
     mode = sys.argv[1] if len(sys.argv) > 1 else 'assembly'
     dst = sys.argv[2] if len(sys.argv) > 2 else None
     if mode == 'callout':
         print('wrote', call_out_shot(dst or 'tara_callout.mp4'))
+    elif mode == 'wave':
+        print('wrote', wave_shot(dst or 'tara_wave.mp4'))
     else:
         print('wrote', assembly_check(dst or 'assembly_check.png'))
