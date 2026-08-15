@@ -66,6 +66,10 @@ Scout is paused, not cancelled. "The Lost Map" is fully written and unstarted in
 | Puppet: walk cycle + scrolling bg (10s) | ✅ Renders clean |
 | Puppet part-set prompts | ✅ `series-tara/PART_SET_PROMPTS.md` |
 | Puppet part art generated | ⬜ **NEXT if taking the puppet route** |
+| Location art (4 stages) | ✅ `tools/scenes.py` — courtyard, neem lane, mango grove, banyan court |
+| Camera (pan / push-in) | ✅ `puppet.Camera` — crops a window from a 2560x1440 stage |
+| Chikoo rig | ✅ 3 parts, tail curls into the question mark |
+| Multi-shot episode assembly | ✅ `tools/episode.py` — shot list to one MP4, no video model |
 | IP safety documented in FLOW_COMPLIANCE §6 | ✅ Done |
 | Series format doc | ✅ `series-tara/SERIES_FORMAT.md` |
 | Episode 1 shot block | ✅ `series-tara/ep01-three-things/tara_ep01.md` (32 shots) |
@@ -147,6 +151,7 @@ _(Add anything that's stuck, half-done, or needs a decision here)_
 | 2026-08-15 | continuity_check JUMP now compares each frame to its local neighbourhood, so a real gesture in a still shot no longer reads as a discontinuity |
 | 2026-08-15 | Puppet walk cycle added with a scrolling background — the cut-out technique for journeys; lantern resized after it dragged on the ground |
 | 2026-08-15 | `series-tara/PART_SET_PROMPTS.md` — prompts for the real puppet artwork, flat-lit and pivot-aware |
+| 2026-08-15 | Full no-Flow chain: four location stages, a camera, a second character rig, and multi-shot assembly in `tools/episode.py` |
 
 ---
 

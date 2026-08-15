@@ -134,6 +134,7 @@ def build_rig(lit_points=0):
     """Assemble the hierarchy. Rotate the torso and everything above follows."""
     # 560 puts the full figure in frame with headroom; 700 cropped the feet
     rig = Rig(root_pos=(960, 560))
+    rig.tag = 'tara'
 
     torso_img, torso_piv = _draw_torso()
     head_img, head_piv = _draw_head()
@@ -160,6 +161,56 @@ def build_rig(lit_points=0):
     rig.add(Part('braid_r', br_img, br_piv, 'head', (254, 120), z=31))
 
     rig.add(Part('lantern', lan_img, lan_piv, 'fore_r', (47, 176), z=70))
+    return rig
+
+
+def _draw_squirrel_body():
+    w, h = 150, 170
+    im = _img(w, h)
+    d = ImageDraw.Draw(im)
+    d.ellipse((26, 40, 118, 156), fill=(146, 124, 100, 255))          # body
+    for i, y in enumerate((60, 84, 108)):                             # three stripes
+        d.ellipse((44 + i * 2, y, 100 - i * 2, y + 13), fill=(238, 226, 200, 255))
+    d.ellipse((44, 132, 74, 160), fill=(126, 104, 84, 255))           # hind foot
+    return im, (72, 60)
+
+
+def _draw_squirrel_head():
+    w, h = 120, 120
+    im = _img(w, h)
+    d = ImageDraw.Draw(im)
+    d.ellipse((22, 24, 98, 100), fill=(152, 130, 106, 255))
+    d.ellipse((28, 12, 54, 40), fill=(132, 110, 88, 255))             # ears
+    d.ellipse((66, 12, 92, 40), fill=(132, 110, 88, 255))
+    d.ellipse((40, 50, 56, 68), fill=INK)                             # eyes
+    d.ellipse((64, 50, 80, 68), fill=INK)
+    d.ellipse((44, 54, 50, 60), fill=(255, 255, 255, 255))
+    d.ellipse((68, 54, 74, 60), fill=(255, 255, 255, 255))
+    d.ellipse((53, 72, 67, 84), fill=(212, 148, 150, 255))            # nose
+    return im, (60, 96)
+
+
+def _draw_squirrel_tail():
+    w, h = 120, 220
+    im = _img(w, h)
+    d = ImageDraw.Draw(im)
+    for i, y in enumerate(range(150, 10, -26)):                       # bushy plume
+        r = 26 + i * 5
+        d.ellipse((60 - r, y - r * 0.8, 60 + r, y + r * 0.8),
+                  fill=(160, 138, 112, 255))
+    return im, (60, 176)
+
+
+def build_chikoo():
+    """The palm squirrel: three parts is enough for a creature this size."""
+    rig = Rig(root_pos=(0, 0))
+    rig.tag = 'chikoo'
+    body, body_piv = _draw_squirrel_body()
+    head, head_piv = _draw_squirrel_head()
+    tail, tail_piv = _draw_squirrel_tail()
+    rig.add(Part('tail', tail, tail_piv, 'body', (58, 132), z=5))
+    rig.add(Part('body', body, body_piv, z=10))
+    rig.add(Part('head', head, head_piv, 'body', (72, 52), z=20))
     return rig
 
 

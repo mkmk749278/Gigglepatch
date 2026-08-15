@@ -170,8 +170,64 @@ class Animation:
 
 
 # --------------------------------------------------------------------------
+# camera
+# --------------------------------------------------------------------------
+class Camera:
+    """A moving window over a larger stage.
+
+    The scene is composited at stage resolution and the camera crops a window
+    out of it, so a push-in samples down from real pixels instead of upscaling.
+    Keyframe x and y (the window centre, in stage pixels) and zoom, where zoom
+    above 1 is closer.
+    """
+
+    def __init__(self, stage, out):
+        self.stage = stage
+        self.out = out
+        self.tracks = {}
+
+    def track(self, channel, keys, easing=ease):
+        self.tracks[channel] = Track(keys, easing)
+        return self
+
+    def at(self, t):
+        sw, sh = self.stage
+        z = self.tracks['zoom'].at(t) if 'zoom' in self.tracks else 1.0
+        cx = self.tracks['x'].at(t) if 'x' in self.tracks else sw / 2
+        cy = self.tracks['y'].at(t) if 'y' in self.tracks else sh / 2
+        ow, oh = self.out
+        # widest window of the output aspect that fits the stage, then zoomed
+        w = min(sw, sh * ow / oh) / z
+        h = w * oh / ow
+        cx = min(max(cx, w / 2), sw - w / 2)
+        cy = min(max(cy, h / 2), sh - h / 2)
+        return (cx - w / 2, cy - h / 2, cx + w / 2, cy + h / 2)
+
+    def apply(self, frame, t):
+        return frame.resize(self.out, Image.LANCZOS, box=self.at(t))
+
+
+# --------------------------------------------------------------------------
 # output
 # --------------------------------------------------------------------------
+def render_shot(rigs, out_size, t, background=None, camera=None):
+    """Composite one frame: background, then every rig, then the camera crop.
+
+    `rigs` is a list of (rig, animation) pairs, drawn in order.
+    """
+    stage = camera.stage if camera else out_size
+    bg = background(t) if callable(background) else background
+    frame = (bg.copy() if bg is not None
+             else Image.new('RGBA', stage, (0, 0, 0, 0)))
+    for rig, anim in rigs:
+        placed = rig.world(anim.pose(t))
+        for part in rig.order():
+            x, y, ang, scale = placed[part.name]
+            frame.alpha_composite(
+                _transform(part.image, part.pivot, (x, y), ang, scale, stage))
+    return camera.apply(frame, t) if camera else frame
+
+
 def render_video(rig, anim, out, seconds, fps=24, size=(1920, 1080),
                  background=None, extra=None, verbose=True):
     """Render the animation straight into an MP4 through ffmpeg.
