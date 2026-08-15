@@ -9,6 +9,45 @@ episode is free forever and the character can never drift.
 
 ---
 
+## EASIEST PATH: ONE A-POSE IMAGE, CUT AUTOMATICALLY
+
+Generating twelve separate parts and hoping they match in style, colour and
+scale is the hard way. `tools/autorig.py` takes **one** picture of the character
+and cuts it into rig parts by analysing the silhouette.
+
+```bash
+python3 tools/autorig.py tara_apose.png series-tara/reference/parts/
+python3 -c "from tools.autorig import annotate; annotate('tara_apose.png','check.jpg')"
+```
+
+The second command draws the detected neck, shoulder, hip and torso lines over
+the source so a bad cut is obvious before you build anything on it.
+
+### The reference must be an A-pose
+
+```
+Full body character reference, standing straight, facing directly forward,
+A-pose: both arms held clearly away from the body at about 45 degrees with a
+visible gap between arm and torso, legs slightly apart with a visible gap
+between them. Isolated on a fully transparent background, nothing else in
+frame, no ground shadow.
+
+[then the full Tara description from CHARACTER_BIBLE.md]
+
+Flat even lighting, no cast shadows, no shading direction. Everything in sharp
+focus. Premium 3D CGI animated feature quality, glossy polished render, large
+expressive eyes with bright catchlights, soft subsurface warmth in the skin,
+crisp fabric detail. NOT photorealistic, NOT a real child, NOT live action.
+
+Full body must be visible including both shoes.
+```
+
+**The gaps are the whole point.** The cutter finds limbs by looking for separate
+runs of opaque pixels across a scanline. With arms flat against the sides there
+is no seam to cut along, and no amount of cleverness invents one.
+
+---
+
 ## THE PART ART IS THE CEILING
 
 Everything about how the finished animation looks is decided here. The rig
