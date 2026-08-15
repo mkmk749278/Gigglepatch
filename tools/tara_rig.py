@@ -13,6 +13,9 @@ import math
 import os
 import sys
 
+import cv2
+import numpy as np
+
 from PIL import Image, ImageDraw, ImageFilter
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -35,6 +38,51 @@ INK = (38, 28, 24, 255)
 
 def _img(w, h):
     return Image.new('RGBA', (w, h), (0, 0, 0, 0))
+
+
+def _volumize(im, light=(-0.55, -0.8), volume=0.34, rim=0.30, shadow=0.26):
+    """Turn a flat filled shape into something that reads as rounded.
+
+    The distance transform of the alpha channel gives, for every pixel, how far
+    it sits from the silhouette edge. That field is effectively a fake normal
+    map: high in the middle of a limb, zero at its outline. Brightening by it
+    produces cylindrical shading, and offsetting it toward the light produces a
+    lit side and a shaded side.
+
+    It is not real 3D — there is no geometry here — but it is the difference
+    between artwork that reads as paper and artwork that reads as form.
+    """
+    arr = np.asarray(im).astype(np.float32)
+    a = arr[..., 3]
+    if a.max() <= 0:
+        return im
+    mask = (a > 8).astype(np.uint8)
+    dist = cv2.distanceTransform(mask, cv2.DIST_L2, 5)
+    if dist.max() <= 0:
+        return im
+    dist /= dist.max()
+    # The raw field ridges along the medial axis, which prints a visible crease
+    # down the middle of any boxy shape. Blurring it turns the ridge back into
+    # a smooth bulge.
+    k = max(int(min(im.size) * 0.16) | 1, 3)
+    dist = cv2.GaussianBlur(dist, (k, k), 0)
+    dist /= max(dist.max(), 1e-6)
+
+    # light and shadow come from the same field, sampled either side of centre
+    lx, ly = light
+    shift = max(int(min(im.size) * 0.09), 3)
+    lit = np.roll(np.roll(dist, int(ly * shift), axis=0), int(lx * shift), axis=1)
+    dark = np.roll(np.roll(dist, -int(ly * shift), axis=0), -int(lx * shift), axis=1)
+
+    core = 1.0 + volume * (dist - 0.45)                # rounded body
+    lo = 1.0 - shadow * np.clip(dark - dist, 0, 1) * 3.0
+    hi = rim * np.clip(lit - dist, 0, 1) * 3.0
+
+    rgb = arr[..., :3]
+    rgb = rgb * core[..., None] * lo[..., None]
+    rgb = rgb + (255.0 - rgb) * np.clip(hi, 0, 1)[..., None]
+    out = np.concatenate([np.clip(rgb, 0, 255), a[..., None]], axis=-1)
+    return Image.fromarray(out.astype(np.uint8))
 
 
 # --------------------------------------------------------------------------
@@ -136,14 +184,16 @@ def build_rig(lit_points=0):
     rig = Rig(root_pos=(960, 560))
     rig.tag = 'tara'
 
-    torso_img, torso_piv = _draw_torso()
-    head_img, head_piv = _draw_head()
-    bl_img, bl_piv = _draw_braid()
-    br_img, br_piv = _draw_braid(flip=True)
-    ua_img, ua_piv = _draw_arm(upper=True)
-    fa_img, fa_piv = _draw_arm(upper=False)
-    leg_img, leg_piv = _draw_leg()
-    lan_img, lan_piv = _draw_lantern(lit_points)
+    # Shading is baked once at build time, not per frame — it costs nothing
+    # during the render and every pose inherits the same lighting.
+    torso_img, torso_piv = _draw_torso(); torso_img = _volumize(torso_img)
+    head_img, head_piv = _draw_head(); head_img = _volumize(head_img, volume=0.26)
+    bl_img, bl_piv = _draw_braid(); bl_img = _volumize(bl_img)
+    br_img, br_piv = _draw_braid(flip=True); br_img = _volumize(br_img)
+    ua_img, ua_piv = _draw_arm(upper=True); ua_img = _volumize(ua_img)
+    fa_img, fa_piv = _draw_arm(upper=False); fa_img = _volumize(fa_img)
+    leg_img, leg_piv = _draw_leg(); leg_img = _volumize(leg_img)
+    lan_img, lan_piv = _draw_lantern(lit_points); lan_img = _volumize(lan_img)
 
     rig.add(Part('torso', torso_img, torso_piv, z=40))
 
@@ -227,9 +277,9 @@ def build_chikoo():
     """The palm squirrel: three parts is enough for a creature this size."""
     rig = Rig(root_pos=(0, 0))
     rig.tag = 'chikoo'
-    body, body_piv = _draw_squirrel_body()
-    head, head_piv = _draw_squirrel_head()
-    tail, tail_piv = _draw_squirrel_tail()
+    body, body_piv = _draw_squirrel_body(); body = _volumize(body)
+    head, head_piv = _draw_squirrel_head(); head = _volumize(head, volume=0.26)
+    tail, tail_piv = _draw_squirrel_tail(); tail = _volumize(tail)
     rig.add(Part('tail', tail, tail_piv, 'body', (52, 140), z=5))
     rig.add(Part('body', body, body_piv, z=10))
     rig.add(Part('head', head, head_piv, 'body', (74, 46), z=20))

@@ -9,6 +9,20 @@ episode is free forever and the character can never drift.
 
 ---
 
+## THE PART ART IS THE CEILING
+
+Everything about how the finished animation looks is decided here. The rig
+handles motion, hierarchy, camera and timing identically whatever art it is
+given — so the quality of these pieces *is* the quality of the show.
+
+Generate them at full premium render quality: glossy 3D CGI, large expressive
+eyes with catchlights, soft subsurface warmth in the skin, visible fabric weave.
+Aim at the polish of a modern animated feature poster. A flat or cheap-looking
+part set produces a flat or cheap-looking episode no matter how good the
+animation is.
+
+---
+
 ## THE RULE THAT MATTERS MOST
 
 **Flat, even lighting. No shadows. No shading direction. No background.**
