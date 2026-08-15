@@ -61,7 +61,11 @@ Scout is paused, not cancelled. "The Lost Map" is fully written and unstarted in
 | Reference image prompts | ✅ `series-tara/CHARACTER_REFERENCE_PROMPTS.md` |
 | Reference images generated | ⬜ Start with Tara, 8+ attempts |
 | **10-second test shot** | ⬜ Flow route — `series-tara/TEST_SHOT.md` |
-| Cut-out puppet engine | ✅ `tools/puppet.py` + `tools/tara_rig.py` — 10s clip renders offline |
+| Cut-out puppet engine | ✅ `tools/puppet.py` + `tools/tara_rig.py` |
+| Puppet: CALL-OUT PAUSE (10s) | ✅ Renders offline, ~70s at 1080p |
+| Puppet: walk cycle + scrolling bg (10s) | ✅ Renders clean |
+| Puppet part-set prompts | ✅ `series-tara/PART_SET_PROMPTS.md` |
+| Puppet part art generated | ⬜ **NEXT if taking the puppet route** |
 | IP safety documented in FLOW_COMPLIANCE §6 | ✅ Done |
 | Series format doc | ✅ `series-tara/SERIES_FORMAT.md` |
 | Episode 1 shot block | ✅ `series-tara/ep01-three-things/tara_ep01.md` (32 shots) |
@@ -97,6 +101,13 @@ jaggery (clap three times). Ends by leaving a sweet on the wall for Kaaki.
 - [ ] Tara: generate Ep. 1 music (BPM 96 acoustic prompt)
 - [ ] Tara: assemble, compress, upload Ep. 1 — Made for Kids **Yes**, AI disclosure **Yes**
 - [ ] Tara: hold Ep. 3+ until Ep. 1 clips confirm the characters render reliably
+
+### Puppet route (parallel option — no credits, no drift)
+
+- [ ] Generate the part set from `series-tara/PART_SET_PROMPTS.md` into `series-tara/reference/parts/`
+- [ ] Wire the PNGs into `tools/tara_rig.py`, replacing the `_draw_*` functions
+- [ ] Check pivots with an all-zero-rotation frame before animating
+- [ ] Decide the split: puppet for character performance, Flow for establishing shots
 
 ### Paused (Scout line — do not delete)
 
@@ -134,6 +145,8 @@ _(Add anything that's stuck, half-done, or needs a decision here)_
 | 2026-08-15 | `series-tara/TEST_SHOT.md` — one 10-second clip to validate Tara before committing to 32 shots |
 | 2026-08-15 | Built a cut-out puppet engine — the technique Dora actually used. 12-part Tara rig, CALL-OUT PAUSE animated, 240 frames at 1080p rendered offline with no credits |
 | 2026-08-15 | continuity_check JUMP now compares each frame to its local neighbourhood, so a real gesture in a still shot no longer reads as a discontinuity |
+| 2026-08-15 | Puppet walk cycle added with a scrolling background — the cut-out technique for journeys; lantern resized after it dragged on the ground |
+| 2026-08-15 | `series-tara/PART_SET_PROMPTS.md` — prompts for the real puppet artwork, flat-lit and pivot-aware |
 
 ---
 

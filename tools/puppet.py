@@ -174,7 +174,13 @@ class Animation:
 # --------------------------------------------------------------------------
 def render_video(rig, anim, out, seconds, fps=24, size=(1920, 1080),
                  background=None, extra=None, verbose=True):
-    """Render the animation straight into an MP4 through ffmpeg."""
+    """Render the animation straight into an MP4 through ffmpeg.
+
+    `background` may be a still Image or a callable(t) -> Image. The callable
+    form is what makes a walk work: the character cycles in place and the
+    background slides past, which is how cut-out shows have always handled
+    journeys without animating forward travel.
+    """
     n = int(round(seconds * fps))
     proc = subprocess.Popen(
         ['ffmpeg', '-y', '-loglevel', 'error',
@@ -186,7 +192,8 @@ def render_video(rig, anim, out, seconds, fps=24, size=(1920, 1080),
 
     for i in range(n):
         t = i / fps
-        frame = rig.render(anim.pose(t), size, background=background)
+        bg = background(t) if callable(background) else background
+        frame = rig.render(anim.pose(t), size, background=bg)
         if extra is not None:
             extra(frame, t, i)
         proc.stdin.write(frame.convert('RGB').tobytes())

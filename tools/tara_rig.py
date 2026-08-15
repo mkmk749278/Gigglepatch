@@ -107,24 +107,26 @@ def _draw_leg():
 
 
 def _draw_lantern(lit_points=0):
-    w = h = 200
+    # Sized against the torso: a lantern a five-year-old can carry, not a
+    # staff. At 200 it dragged on the ground during a walk.
+    w = h = 132
     im = _img(w, h)
     d = ImageDraw.Draw(im)
     pts = []
     for i in range(10):                                             # five-point star
         ang = -math.pi / 2 + i * math.pi / 5
-        r = 78 if i % 2 == 0 else 32
-        pts.append((100 + r * math.cos(ang), 104 + r * math.sin(ang)))
+        r = 52 if i % 2 == 0 else 21
+        pts.append((66 + r * math.cos(ang), 70 + r * math.sin(ang)))
     d.polygon(pts, fill=BRASS)
-    d.line([(100, 26), (100, 8)], fill=BRASS, width=7)              # ring handle
-    d.ellipse((86, 0, 114, 22), outline=BRASS, width=7)
+    d.line([(66, 18), (66, 6)], fill=BRASS, width=5)                # ring handle
+    d.ellipse((56, 0, 76, 16), outline=BRASS, width=5)
     for i in range(5):                                              # the five lights
         ang = -math.pi / 2 + i * 2 * math.pi / 5
-        cx, cy = 100 + 52 * math.cos(ang), 104 + 52 * math.sin(ang)
+        cx, cy = 66 + 35 * math.cos(ang), 70 + 35 * math.sin(ang)
         on = i < lit_points
-        d.ellipse((cx - 11, cy - 11, cx + 11, cy + 11),
+        d.ellipse((cx - 8, cy - 8, cx + 8, cy + 8),
                   fill=GLOW if on else BRASS_LT)
-    return im, (100, 8)
+    return im, (66, 6)
 
 
 # --------------------------------------------------------------------------
@@ -232,14 +234,82 @@ def call_out_pause():
     return a
 
 
+def walk_cycle(seconds=10.0, step=0.52):
+    """A looping walk. The feet cycle in place and the world slides past.
+
+    Timing is the whole game here. Each step is a contact (foot planted, body
+    at its lowest), a passing position (body at its highest), then the next
+    contact on the other foot. The body therefore bobs *twice* per full stride,
+    not once — get that wrong and the walk reads as a limp.
+    """
+    a = Animation()
+    n = int(seconds / step) + 2
+    t = lambda i: i * step
+
+    # Legs alternate. One is swinging forward while the other drives back.
+    a.track('leg_l', 'rot', [(t(i), 20 if i % 2 == 0 else -20) for i in range(n)])
+    a.track('leg_r', 'rot', [(t(i), -20 if i % 2 == 0 else 20) for i in range(n)])
+
+    # The free arm counter-swings against the legs — opposite arm to opposite
+    # leg, which is what stops a walk looking like a toy soldier. It needs a
+    # wide swing to read at all; small angles just look like a twitch.
+    a.track('arm_l', 'rot', [(t(i), -26 if i % 2 == 0 else 26) for i in range(n)])
+    a.track('fore_l', 'rot', [(t(i), 8 if i % 2 == 0 else 22) for i in range(n)])
+
+    # The lantern hand stays up at her side, so the lantern rides at hip height
+    # instead of dragging along the ground. It swings a little, but far less
+    # than the free arm — she is carrying something and knows it.
+    a.track('arm_r', 'rot', [(t(i), -18 if i % 2 == 0 else -10) for i in range(n)])
+    a.track('fore_r', 'rot', [(t(i), -58 if i % 2 == 0 else -50) for i in range(n)])
+
+    # Body bob at twice the step rate: down on each contact, up on each pass
+    bob = []
+    for i in range(n * 2):
+        bob.append((i * step / 2, 0 if i % 2 == 0 else -13))
+    a.track('torso', 'dy', bob)
+    a.track('torso', 'rot', [(t(i), 2.0 if i % 2 == 0 else -2.0) for i in range(n)])
+
+    # Head stays level-ish — it counters the body, it does not ride it
+    a.track('head', 'rot', [(t(i), -1.5 if i % 2 == 0 else 1.5) for i in range(n)])
+
+    # Braids swing a half-beat behind the body. That lag is the follow-through.
+    a.track('braid_l', 'rot', [(t(i) + step * 0.35, 12 if i % 2 == 0 else -8)
+                               for i in range(n)])
+    a.track('braid_r', 'rot', [(t(i) + step * 0.35, -8 if i % 2 == 0 else 12)
+                               for i in range(n)])
+
+    # The lantern hangs from its ring handle, so it stays upright in world
+    # space while the arm swings underneath it, lagging half a beat behind.
+    a.track('lantern', 'rot', [(t(i) + step * 0.5, 82 if i % 2 == 0 else 66)
+                               for i in range(n)])
+    return a
+
+
+def scrolling_background(size=(1920, 1080), speed=210.0):
+    """Returns a callable(t) that slides a tiled lane past the camera."""
+    w, h = size
+    tile = build_background((w * 2, h))
+    def at(t):
+        off = int((t * speed) % w)
+        frame = Image.new('RGBA', size)
+        frame.paste(tile.crop((off, 0, off + w, h)), (0, 0))
+        return frame
+    return at
+
+
 def main():
     out = sys.argv[1] if len(sys.argv) > 1 else 'tara_callout_test.mp4'
+    which = sys.argv[2] if len(sys.argv) > 2 else 'callout'
     size = (1920, 1080)
     rig = build_rig(lit_points=3)
-    bg = build_background(size)
-    print(f'rig: {len(rig.parts)} parts')
-    render_video(rig, call_out_pause(), out, seconds=10.0, fps=24,
-                 size=size, background=bg)
+    print(f'rig: {len(rig.parts)} parts   animation: {which}')
+
+    if which == 'walk':
+        anim, bg = walk_cycle(10.0), scrolling_background(size)
+    else:
+        anim, bg = call_out_pause(), build_background(size)
+
+    render_video(rig, anim, out, seconds=10.0, fps=24, size=size, background=bg)
 
 
 if __name__ == '__main__':
