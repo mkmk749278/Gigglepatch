@@ -1,0 +1,12 @@
+# Never commit photographs or album output — these are personal photos and
+# large binaries. The pipeline regenerates everything from input/original_photos.
+input/
+work/
+output/
+album/
+analysis/
+models/
+*.jpg
+*.JPG
+*.tif
+*.pdf
