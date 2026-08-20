@@ -1,5 +1,5 @@
 # GigglePatch — Active Context
-### Last updated: 2026-08-13
+### Last updated: 2026-08-20
 
 > Update this file whenever something changes. It is the single source of truth for what is happening right now.
 
@@ -36,17 +36,60 @@ Negative results worth remembering:
 
 ---
 
-## Production Route Decision (open)
+## Production Route Decision — RESOLVED (2026-08-20)
 
-| Route | Needs | Gets |
-|-------|-------|------|
-| Keep Google Flow | nothing | best motion quality; consistency via Characters tab |
-| Video API (Replicate/FAL) | API key | Claude generates directly, no setup |
-| **GPU PC + Claude Code locally** | 24GB VRAM GPU | LoRA training + local video models, no per-run cost |
-| CC0 rigged 3D | nothing | guaranteed consistency, low-poly look |
+**Constraint confirmed by the user: there is no GPU machine and no budget.**
+Everything must run in the cloud sandbox (4 CPU cores, 15 GB RAM, no GPU,
+ephemeral container) plus web access. That rules out every route except the
+CPU pipeline, so the decision is made by elimination:
 
-**Note:** this cloud sandbox has no GPU and blocks SSH, so it cannot drive a rented
-GPU box. Running Claude Code *on* the GPU machine is the way to use one.
+| Route | Status |
+|---|---|
+| Google Flow | Needs AI Pro tier + credits; cost scales with clip count, so long-form is not free |
+| Video API (Replicate/FAL) | Paid per second of output |
+| GPU PC + local models | No GPU available |
+| **CPU pipeline (this repo)** | **Chosen — zero marginal cost, unlimited length** |
+
+### Measured on this container (2026-08-20)
+
+| Stage | Throughput | 10-min episode |
+|---|---|---|
+| 2.5D rig, no motion blur | 0.88 s/frame | ~55 min on 4 cores |
+| 2.5D rig, 4x motion blur | 3.88 s/frame | ~4 h on 4 cores |
+| Blender Cycles CPU (960x540, 32 spp) | 8.47 s/frame | ~8.5 h on 4 cores |
+| Kokoro TTS | 0.72x realtime | ~7 min |
+
+**Architecture that makes long-form affordable:** Blender renders character and
+background *plates* once (minutes of compute), then the 2.5D rig animates those
+plates at ~0.9 s/frame. Rendering full 3D per frame is ~10x more expensive and
+is not used for episode-length work.
+
+**Accepted trade-off:** this route cannot hit the DreamWorks/Pixar look the
+CLAUDE.md style bible describes. It is low-poly CC0 plus 2.5D cutout animation
+— "medium" quality by our own method testing. That is the unavoidable cost of
+free-with-no-GPU, and it is the only route that produces long videos at zero
+marginal cost.
+
+**Open:** episode-length renders exceed the container's idle lifetime, so long
+builds must render in committed chunks rather than one pass.
+
+---
+
+## Pipeline reproducibility — FIXED (2026-08-20)
+
+All 13 pipeline scripts hardcoded an absolute path into a *previous session's*
+scratchpad, and the assets they loaded were never committed. The pipeline had
+been unrunnable since that container was reclaimed.
+
+- `pipeline/env.py` — repo-relative path resolution (`SP`, `ASSETS`, `KF`)
+- `pipeline/fetch_assets.py` — re-downloads the Kokoro TTS model on a fresh container
+- `pipeline/smoke_test.py` — verifies all 7 stages; currently **7/7 passing**
+- `.gitignore` — keeps the 337 MB asset cache and render intermediates out of git
+
+**Still missing:** the source artwork (`kiran_side.png`, the Flux keyframe
+plates) was lost with the old container and cannot be regenerated on CPU. The
+smoke test runs against a synthetic placeholder plate. Regenerating real plates
+needs either the Flow account or a Blender-rendered character.
 
 ---
 

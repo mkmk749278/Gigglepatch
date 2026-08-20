@@ -8,7 +8,12 @@ import requests, urllib.parse, os, time, random
 from concurrent.futures import ThreadPoolExecutor
 
 CA  = '/root/.ccr/ca-bundle.crt'
-OUT = '/tmp/claude-0/-home-user-Gigglepatch/eee1d25c-91e0-5fd5-8a12-02f94c656abc/scratchpad/kf'
+import os as _os, sys as _sys
+_d = _os.path.dirname(_os.path.abspath(__file__))
+while _d != '/' and not _os.path.exists(_os.path.join(_d, 'env.py')):
+    _d = _os.path.dirname(_d)
+_sys.path.insert(0, _d)
+from env import KF as OUT
 os.makedirs(OUT, exist_ok=True)
 
 STYLE = ('Pixar DreamWorks 3D animation style, cinematic lighting, depth of field, '

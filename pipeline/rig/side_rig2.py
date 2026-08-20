@@ -11,8 +11,12 @@ Kiran side rig v2 — animation-principles pass.
 """
 import numpy as np, math, os
 from PIL import Image, ImageDraw, ImageFilter
-
-SP='/tmp/claude-0/-home-user-Gigglepatch/eee1d25c-91e0-5fd5-8a12-02f94c656abc/scratchpad'
+import os as _os, sys as _sys
+_d = _os.path.dirname(_os.path.abspath(__file__))
+while _d != '/' and not _os.path.exists(_os.path.join(_d, 'env.py')):
+    _d = _os.path.dirname(_d)
+_sys.path.insert(0, _d)
+from env import SP
 BASE=Image.open(os.path.join(SP,'kiran_side.png')).convert('RGBA')
 BW,BH=BASE.size                     # 244 x 900
 

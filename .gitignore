@@ -1,0 +1,6 @@
+# Rebuilt by pipeline/fetch_assets.py — never committed (hundreds of MB)
+.assets/
+# Render intermediates and outputs
+.work/
+__pycache__/
+*.pyc

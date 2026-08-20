@@ -12,11 +12,17 @@ import imageio_ffmpeg
 import side_rig as S
 import kiran_rig as K
 import door_fx as DFX
-
-SP='/tmp/claude-0/-home-user-Gigglepatch/eee1d25c-91e0-5fd5-8a12-02f94c656abc/scratchpad'
+import os as _os, sys as _sys
+_d = _os.path.dirname(_os.path.abspath(__file__))
+while _d != '/' and not _os.path.exists(_os.path.join(_d, 'env.py')):
+    _d = _os.path.dirname(_d)
+_sys.path.insert(0, _d)
+from env import SP
+import env as _ENV
 KF=os.path.join(SP,'kf')
 OUT=os.path.join(SP,'v2work'); shutil.rmtree(OUT,ignore_errors=True); os.makedirs(OUT)
-MUSIC='/root/.claude/uploads/eee1d25c-91e0-5fd5-8a12-02f94c656abc/facc5156-Midnight_Bazaar.mp3'
+# music track lives in the asset cache; absent -> build runs silent
+MUSIC = _os.path.join(_ENV.ASSETS, 'Midnight_Bazaar.mp3')
 F=imageio_ffmpeg.get_ffmpeg_exe()
 FPS,W,H=30,1280,720
 FB='/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf'

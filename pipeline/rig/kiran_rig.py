@@ -6,8 +6,12 @@ Same principle as a game character: one asset, transformed per frame.
 import numpy as np, math, os
 from PIL import Image, ImageDraw, ImageFilter
 import cv2
-
-SP='/tmp/claude-0/-home-user-Gigglepatch/eee1d25c-91e0-5fd5-8a12-02f94c656abc/scratchpad'
+import os as _os, sys as _sys
+_d = _os.path.dirname(_os.path.abspath(__file__))
+while _d != '/' and not _os.path.exists(_os.path.join(_d, 'env.py')):
+    _d = _os.path.dirname(_d)
+_sys.path.insert(0, _d)
+from env import SP
 SRC=os.path.join(SP,'kiran_cut.png')
 
 BASE=Image.open(SRC).convert('RGBA')

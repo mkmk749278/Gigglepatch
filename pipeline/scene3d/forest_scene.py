@@ -5,8 +5,12 @@ Ground speed is matched to the measured stride so the paws don't skate.
 """
 import bpy, math, os, sys, random, mathutils, addon_utils
 addon_utils.enable('cycles', default_set=True, persistent=True)
-
-SP='/tmp/claude-0/-home-user-Gigglepatch/eee1d25c-91e0-5fd5-8a12-02f94c656abc/scratchpad'
+import os as _os, sys as _sys
+_d = _os.path.dirname(_os.path.abspath(__file__))
+while _d != '/' and not _os.path.exists(_os.path.join(_d, 'env.py')):
+    _d = _os.path.dirname(_d)
+_sys.path.insert(0, _d)
+from env import SP
 A=os.path.join(SP,'assets3d')
 OUT=os.path.join(SP,'forest'); os.makedirs(OUT,exist_ok=True)
 
