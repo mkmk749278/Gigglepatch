@@ -45,11 +45,11 @@ def duck_mix(score_p, narr_p, out_p, duck=0.62, attack=0.08, release=0.55):
     return out_p, float(gain.min())
 
 
-def concat_segments(list_p, out_p):
+def concat_segments(list_p, out_p, segdir='segments'):
     order = [s[0] for s in SH.SHOTS]
     with open(list_p, 'w') as f:
         for name in order:
-            seg = os.path.join(env.SP, 'segments', f'{name}.mp4')
+            seg = os.path.join(env.SP, segdir, f'{name}.mp4')
             if not os.path.exists(seg):
                 raise FileNotFoundError(f'missing segment {seg}')
             f.write(f"file '{seg}'\n")
@@ -89,8 +89,9 @@ def main():
     t0 = time.time()
     work = env.SP
     print('concatenating segments ...', flush=True)
+    segdir = os.environ.get('REEL_SEGMENTS', 'segments')
     silent = concat_segments(os.path.join(work, 'segments.txt'),
-                             os.path.join(work, 'reel_silent.mp4'))
+                             os.path.join(work, 'reel_silent.mp4'), segdir)
 
     print('mixing audio ...', flush=True)
     mixed, gmin = duck_mix(os.path.join(work, 'score.wav'),
@@ -99,7 +100,8 @@ def main():
     print(f'  music ducks to {gmin:.2f} under narration', flush=True)
 
     print('encoding final ...', flush=True)
-    out = finish(silent, mixed, os.path.join(work, 'midnight_market_reel.mp4'))
+    out = finish(silent, mixed, os.path.join(
+        work, os.environ.get('REEL_OUT', 'midnight_market_reel.mp4')))
     mb = os.path.getsize(out) / 1e6
     print(f'\n{out}\n  {mb:.1f} MB  built in {(time.time()-t0)/60:.1f} min')
 
