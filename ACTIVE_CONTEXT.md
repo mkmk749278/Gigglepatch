@@ -187,3 +187,39 @@ Flow Characters tab descriptions: `characters/character_descriptions.md`
 | 2026-08-13 | Series bible created for The Midnight Market (mystery + hidden magic, ages 6–12) |
 | 2026-08-13 | All three character reference images generated in Google Flow and confirmed |
 | 2026-08-13 | Character descriptions saved to episodes/the-midnight-market/characters/ |
+
+---
+
+## Test Reel — "The Midnight Market" (2026-08-20)
+
+A five-minute reel built end to end in the sandbox to judge whether the
+free CPU route is worth building a series on. Nothing paid, no GPU, no
+external assets.
+
+**Pipeline:** `pipeline/reel/`
+
+| Script | Role |
+|---|---|
+| `sets.py` | forest / market / door environments, procedural |
+| `shots.py` | 14-shot manifest, exactly 300 s at 24 fps |
+| `render_plates.py` | colour + depth plate per shot, grouped by set |
+| `render_frames.py` | animates plates into segments, one shot per worker |
+| `score.py`, `music.py` | procedural score, Karplus-Strong over saw pads |
+| `narrate.py` | Kokoro narration timed to shots (~15% coverage) |
+| `assemble.py` | concat, duck music under voice, title, encode |
+
+**Why plates and not 3D frames:** Cycles multithreads a single frame across
+all cores, so full 3D is ~8.5 s/frame — about 17 h for five minutes. Each
+shot is instead one rendered plate that the numpy compositor animates with
+depth-layered parallax, fog, bloom, DOF and grade at well under a second a
+frame.
+
+**Optimisations that made it affordable:** parallax 1579 → 365 ms/frame by
+decomposing depth layers once per shot and cropping each layer to its
+bounding box; bloom 335 → 141 ms by building glow at quarter resolution.
+
+**Known limits of this route** — the things to judge the reel against:
+- Low-poly CC0 look, not the theatrical style in the CLAUDE.md style bible
+- No character animation in this reel; environments and camera only
+- 2.5D parallax gives real depth but cannot orbit or cut inside geometry
+- Music is synthesised, not Lyria — simpler and more repetitive by nature
