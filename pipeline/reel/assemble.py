@@ -58,26 +58,58 @@ def concat_segments(list_p, out_p, segdir='segments'):
     return out_p
 
 
-def esc(t):
-    return t.replace("'", r"\'").replace(':', r'\:')
+def title_card(text, size, out_p, w=1280, h=720, dy=0, letterspace=6):
+    """
+    Render a title to an RGBA PNG.
+
+    The static ffmpeg build here ships without the drawtext filter even though
+    freetype is compiled in, so titles are drawn with PIL and composited as an
+    overlay instead. It also gives real letter-spacing and a soft shadow,
+    which drawtext does not.
+    """
+    from PIL import Image, ImageDraw, ImageFont, ImageFilter
+    font = ImageFont.truetype(FONT, size)
+    glyphs = [(c, font.getbbox(c)) for c in text]
+    total = sum(g[1][2] - g[1][0] for g in glyphs) + letterspace * (len(text) - 1)
+
+    card = Image.new('RGBA', (w, h), (0, 0, 0, 0))
+    d = ImageDraw.Draw(card)
+    x = (w - total) / 2
+    y = (h - size) / 2 + dy
+    for c, bb in glyphs:
+        d.text((x - bb[0], y), c, font=font, fill=(255, 252, 244, 240))
+        x += (bb[2] - bb[0]) + letterspace
+
+    # soft drop shadow so the type holds over a bright frame
+    shadow = card.filter(ImageFilter.GaussianBlur(9))
+    out = Image.new('RGBA', (w, h), (0, 0, 0, 0))
+    out.alpha_composite(Image.merge('RGBA', (*[Image.new('L', (w, h), 0)] * 3,
+                                             shadow.split()[3].point(lambda v: int(v * 0.75)))))
+    out.alpha_composite(card)
+    out.save(out_p)
+    return out_p
 
 
 def finish(video_p, audio_p, out_p):
-    # title fades up over the opening shot; sign-off over the last
-    dt = (
-        f"drawtext=fontfile={FONT}:text='{esc(TITLE)}':"
-        f"fontcolor=white@0.92:fontsize=64:x=(w-tw)/2:y=(h-th)/2-30:"
-        f"alpha='if(lt(t,2),0,if(lt(t,3.2),(t-2)/1.2,if(lt(t,8),1,"
-        f"if(lt(t,9.6),1-(t-8)/1.6,0))))',"
-        f"drawtext=fontfile={FONT}:text='{esc(END)}':"
-        f"fontcolor=white@0.85:fontsize=40:x=(w-tw)/2:y=(h-th)/2:"
-        f"alpha='if(lt(t,292),0,if(lt(t,293.5),(t-292)/1.5,"
-        f"if(lt(t,297.5),1,1-(t-297.5)/1.5)))'"
+    work = os.path.dirname(out_p)
+    t1 = title_card(TITLE, 66, os.path.join(work, '_title.png'), dy=-24)
+    t2 = title_card(END, 42, os.path.join(work, '_end.png'))
+
+    fc = (
+        "[1:v]format=rgba,fade=in:st=2:d=1.3:alpha=1,"
+        "fade=out:st=7.6:d=1.6:alpha=1[t1];"
+        "[2:v]format=rgba,fade=in:st=292:d=1.5:alpha=1,"
+        "fade=out:st=297.4:d=1.6:alpha=1[t2];"
+        "[0:v][t1]overlay=0:0[o1];[o1][t2]overlay=0:0[v]"
     )
     subprocess.run([
         env.ffmpeg(), '-y', '-loglevel', 'error',
-        '-i', video_p, '-i', audio_p,
-        '-vf', dt,
+        '-i', video_p,
+        '-loop', '1', '-i', t1,
+        '-loop', '1', '-i', t2,
+        '-i', audio_p,
+        '-filter_complex', fc,
+        '-map', '[v]', '-map', '3:a',
         '-c:v', 'libx264', '-preset', 'slow', '-crf', '20',
         '-pix_fmt', 'yuv420p', '-movflags', '+faststart',
         '-c:a', 'aac', '-b:a', '192k',
