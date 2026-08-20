@@ -20,16 +20,24 @@ def main():
     t_start = time.time()
 
     for set_name, group in groups.items():
-        print(f'\n=== building set: {set_name} ===', flush=True)
+        # Only build sets that still owe a render. Blender does not fully free
+        # a scene between builds, so rebuilding every set on a partial re-run
+        # climbs until the OOM killer takes the process.
+        pending = [g for g in group
+                   if not os.path.exists(os.path.join(outdir, f'{g[0]}.png'))]
+        if not pending:
+            print(f'\n=== set {set_name}: all plates present, skipping build ===',
+                  flush=True)
+            done += len(group)
+            continue
+
+        print(f'\n=== building set: {set_name} '
+              f'({len(pending)}/{len(group)} plates to render) ===', flush=True)
         t0 = time.time()
         sc = sets.SETS[set_name]()
         print(f'    built in {time.time()-t0:.1f}s', flush=True)
 
-        for name, _s, loc, look, lens, secs, move in group:
-            if os.path.exists(os.path.join(outdir, f'{name}.png')):
-                print(f'    skip {name} (exists)', flush=True)
-                done += 1
-                continue
+        for name, _s, loc, look, lens, secs, move in pending:
             dt = P.render_plate(sc, name, loc, look, lens)
             done += 1
             el = time.time() - t_start

@@ -36,7 +36,7 @@ def _palette():
         cloth_c=S.mat('clothC', (0.30, 0.20, 0.06), rough=0.85),
         wood=S.mat('wood', (0.17, 0.11, 0.07), rough=0.9),
         teal=S.mat('teal', (0.10, 0.62, 0.60), rough=0.25,
-                   emit=(0.10, 0.75, 0.72), emit_str=5.0),
+                   emit=(0.10, 0.75, 0.72), emit_str=2.4),
     )
 
 
@@ -165,10 +165,13 @@ def door(seed=3):
     lintel.scale = (1.55, 0.24, 0.2)
 
     key = bpy.data.lights.new('doorlight', 'AREA')
-    key.energy, key.color, key.size = 420, (0.30, 0.95, 0.90), 3.0
+    key.energy, key.color, key.size = 260, (0.30, 0.95, 0.90), 3.0
     ko = bpy.data.objects.new('doorlight', key)
-    ko.location = (0, 6.4, 2.4)
+    ko.location = (0, 6.6, 2.4)
     ko.rotation_euler = (1.5708, 0, 0)
+    # the lamp spills light into the clearing but must not be seen directly --
+    # it sits between the camera and the door and renders as a white slab
+    ko.visible_camera = False
     bpy.context.collection.objects.link(ko)
 
     for i in range(10):
